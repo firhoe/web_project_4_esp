@@ -1,0 +1,14 @@
+/* initiantes vendor */
+
+@import url(../vendor/normalize.css);
+@import url(../vendor/init.css);
+@import url(../vendor/fonts/inter.css);
+
+/* initiantes page */
+
+@import url(../blocks/page/page.css);
+
+/* initiantes header */
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
