@@ -1,0 +1,19 @@
+.card__like-button {
+  width: 21px;
+  background-image: url(../../../images/heart-icon.svg);
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  padding: 0;
+  outline: unset;
+}
+
+.card__like-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.card__like-button:active {
+  background-image: url(../../../images/blackheart-icon.svg);
+}

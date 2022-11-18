@@ -1,0 +1,8 @@
+.card {
+  background-color: white;
+  width: 282px;
+  border-radius: 15px;
+  list-style: none;
+  display: grid;
+  gap: 25px;
+}
