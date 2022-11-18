@@ -28,3 +28,16 @@
 @import url(../blocks/profile/__profession/profile__profession.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
+
+/* initiantes cards */
+
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__container/cards__container.css);
+
+/* initiantes card */
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__information/card__information.css);
+@import url(../blocks/card/__like-button/card__like-button.css);
+@import url(../blocks/card/__title/card__title.css);
