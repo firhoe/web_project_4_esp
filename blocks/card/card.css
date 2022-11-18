@@ -1,8 +1,6 @@
 .card {
   background-color: white;
-  width: 282px;
+  width: 100%;
   border-radius: 15px;
   list-style: none;
-  display: grid;
-  gap: 25px;
 }
