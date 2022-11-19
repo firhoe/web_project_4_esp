@@ -1,16 +1,46 @@
-# Proyecto 4: Alrededor de los Estados Unidos
+# Around the US 🗺️​
 
-### Descripción general
+### Descripción general ⚙️
 
-* Figma
-* Imágenes
+Esta landing es un recopilatorio del viaje de un usuario alrededor de los Estados Unidos.
+Todas las fotos han documentado diversas reservas naturales desde lagos hasta montañas.
+Actualmente esta landing te permite colocar tu nombre y ocupación a travez de un formulario
+emergente, asi que animate!
 
-**Figma**
+![Around the US](https://media.giphy.com/media/xGeTzux25uNbzIYdnc/giphy.gif)
 
-* [Enlace al proyecto en Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
+Tecnologias Utilizadas 🛠️
 
-**Imágenes**
+1. JavaScript
+   - Este proyecto implementa EventListeners para realizar ciertas acciones en funcion de
+     los eventos. Actualmente, este proyecto abrirá un editor cuando se haga clic en el botón "editar"
+     y permitira al usuario colocar su nombre y ocupacion.
+2. Diseño Responsivo
+   - El sitio web se ha desarrollado siguiendo el primer enfoque de un dispositivo móvil.
+   - El sitio web está diseñado para escalar sin problemas en:
+     - 1280px y superior (portátiles estándar y superiores).
+     - De 1024px a 1280px (desde una tablet en horizontal hasta un portátil estándar).
+     - De 768px a 1024px (de una tablet en vertical a una tablet en horizontal).
+     - De 425px a 768px (desde un gran smartphone hasta una tablet en vertical).
+     - Hasta 425px (dispositivos móviles).
+3. CCS Grid
+4. CCS Flexbox
+5. Optimización de fuentes para dispositivos con diferentes resoluciones
+6. BEM - Block, Element, Modifier
 
-A la hora de trabajar, debes optar por exportar las imágenes directamente desde Figma; te recomendamos hacerlo para practicar más. No olvides optimizarlas [aquí](https://tinypng.com/), para que tu proyecto cargue más rápido. 
+**Herramientas Extra**
 
-¡Esperamos que te diviertas con JavaScript!
+- [Figma](https://figma.com/)
+- [TinyPng](https://tinypng.com/)
+- [SVGOMG](https://jakearchibald.github.io/svgomg/)
+
+**Documento con Especificaciones del Proyecto**
+
+- [Proyecto en Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
+
+## Mejoras futuras 🔍
+
+- Permitir a los usuarios actualizar el avatar de su perfil.
+- Permitir agregar o quitar tarjetas con los lugares que han visitado nuevos usuarios.
+
+## Proyecto en Vivo 💻
