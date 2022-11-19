@@ -12,16 +12,13 @@
   </head>
   <body>
     <div class="page">
-      <!-- Header -->
       <header class="header">
         <img
           src="./images/logo.svg"
           alt="Logo Around the US"
           class="header__logo" />
       </header>
-      <!-- Main Body -->
       <main class="content">
-        <!-- Profile -->
         <section class="profile">
           <div class="profile__container">
             <img
@@ -38,7 +35,6 @@
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
-        <!-- Elements -->
         <section class="cards">
           <ul class="cards__container">
             <li class="card">
@@ -114,28 +110,30 @@
           </ul>
         </section>
       </main>
-      <!-- Footer -->
       <footer class="footer">
         <p class="footer__copyright">© 2021 Around the US</p>
       </footer>
-      <!-- Profile edit popup -->
       <section class="popup">
         <div class="popup__container">
-          <button type="button" class="popup__close-button"></button>
-          <h3 class="popup__title">Edit Profile</h3>
           <form action="#" name="edit" class="popup__form" novalidate>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              class="popup__input popup__input_type_name" />
-            <input
-              type="text"
-              name="about"
-              placeholder="About Me"
-              class="popup__input popup__input_type_about" />
+            <h3 class="popup__title">Edit Profile</h3>
+            <div class="popup__input-container">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                id="popup_input_name"
+                class="popup__input" />
+              <input
+                type="text"
+                name="about"
+                placeholder="About Me"
+                id="popup_input_about"
+                class="popup__input" />
+            </div>
             <button type="submit" class="popup__submit-button">Save</button>
           </form>
+          <button type="button" class="popup__close-button"></button>
         </div>
       </section>
     </div>
