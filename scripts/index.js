@@ -26,7 +26,7 @@ function handleFormSubmit(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
-  console.log(profileName.textContent);
+  toggleForm();
 }
 
 form.addEventListener('submit', handleFormSubmit);
