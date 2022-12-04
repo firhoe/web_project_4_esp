@@ -53,6 +53,8 @@ const submitCardButton = document.querySelector('.popup__create-card-button');
 
 submitCardButton.addEventListener('click', handleCardSubmit);
 
+// initiates popup add Card
+
 const openAddCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_add_card');
 const closeAddCardButton = popupAddCard.querySelector(
@@ -65,6 +67,8 @@ function toggleFormAddCard() {
 
 openAddCardButton.addEventListener('click', toggleFormAddCard);
 closeAddCardButton.addEventListener('click', toggleFormAddCard);
+
+// initiates delete Cards
 
 // initiates profile editor popup profile Edit
 
@@ -97,5 +101,3 @@ function handleFormSubmit(e) {
 }
 
 form.addEventListener('submit', handleFormSubmit);
-
-// initiates profile editor popup add Card
