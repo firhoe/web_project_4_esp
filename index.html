@@ -37,7 +37,8 @@
         </section>
         <section class="cards">
           <ul class="cards__container">
-            <li class="card">
+            <!-- <li class="card">
+              <button type="button" class="card__delete-button"></button>
               <img
                 src="./images/bald-mountains.jpg"
                 alt="bald mountains"
@@ -46,9 +47,10 @@
                 <h2 class="card__title">Bald Mountains</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
-            </li>
+            </li> -->
           </ul>
-          <ul class="cards__container">
+
+          <!-- <ul class="cards__container">
             <li class="card">
               <img
                 src="./images/vanois-national.jpg"
@@ -107,15 +109,16 @@
                 <button type="button" class="card__like-button"></button>
               </div>
             </li>
-          </ul>
+          </ul> -->
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2021 Around the US</p>
       </footer>
-      <section class="popup">
+      <!-- Edit Profile-->
+      <section class="popup popup_edit_profile">
         <div class="popup__container">
-          <form action="#" name="edit" class="popup__form" novalidate>
+          <form class="popup__form" action="#" name="edit" novalidate>
             <h3 class="popup__title">Edit Profile</h3>
             <div class="popup__input-container">
               <input
@@ -123,20 +126,65 @@
                 name="name"
                 placeholder="Name"
                 id="popup_input_name"
-                class="popup__input" />
+                class="popup__input"
+                required />
               <input
                 type="text"
                 name="about"
                 placeholder="About Me"
                 id="popup_input_about"
-                class="popup__input" />
+                class="popup__input"
+                required />
             </div>
             <button type="submit" class="popup__submit-button">Save</button>
           </form>
           <button type="button" class="popup__close-button"></button>
         </div>
       </section>
+      <!-- Add new place -->
+      <section class="popup popup_add_card">
+        <div class="popup__container">
+          <form class="popup__form" action="#" name="place" novalidate>
+            <h3 class="popup__title">New Place</h3>
+            <div class="popup__input-container">
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                id="popup_input_title"
+                class="popup__input"
+                required />
+              <input
+                type="url"
+                name="image-link"
+                placeholder="Image link"
+                id="popup_input_link"
+                class="popup__input"
+                value
+                required />
+            </div>
+            <button
+              type="submit"
+              class="popup__submit-button popup__create-card-button">
+              Create
+            </button>
+          </form>
+          <button
+            type="button"
+            class="popup__close-button popup_add-card-close-button"></button>
+        </div>
+      </section>
     </div>
+    <template class="card-template">
+      <li class="card">
+        <button type="button" class="card__delete-button"></button>
+        <img src="" alt="" class="card__image" />
+        <div class="card__information">
+          <h2 class="card__title"></h2>
+          <button type="button" class="card__like-button"></button>
+        </div>
+      </li>
+    </template>
     <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>
