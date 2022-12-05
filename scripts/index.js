@@ -36,11 +36,22 @@ initialCards.forEach(function (item) {
   cardNode.querySelector('.card__image').src = item.link;
   cardsContainer.append(cardNode);
 
+  // initiates delete card
+
   const cardDelete = cardNode.querySelector('.card__delete-button');
   cardDelete.addEventListener('click', (event) => {
     cardNode.remove();
   });
+
+  // initiates button like
+  const likeButtonAnimate = cardNode.querySelector('.card__like-button');
+
+  likeButtonAnimate.addEventListener('click', () => {
+    likeButtonAnimate.classList.toggle('card__like-button_on');
+  });
 });
+
+// initiates card form
 
 function handleCardSubmit(e) {
   e.preventDefault();
