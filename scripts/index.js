@@ -56,13 +56,13 @@ initialCards.forEach(function (item) {
   openPreviewImage.addEventListener('click', togglePreviewImage);
 
   cardNode.querySelector('.card__image').addEventListener('click', function () {
-    const popupPreviewImage = document.querySelector('.popup_preview_image');
+    const popupPreviewImage = document.querySelector('.popup__image');
     popupPreviewImage.src = item.link;
   });
   return cardNode;
 });
 
-//initiates popup preview image card
+//initiates popup close preview image card
 
 const popupPreviewImage = document.querySelector('.popup_preview_image');
 const closePreviewImage = popupPreviewImage.querySelector('.popup_preview-close-button');
