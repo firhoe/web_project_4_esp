@@ -15,6 +15,12 @@ Tecnologias Utilizadas 🛠️
    - Este proyecto implementa EventListeners para realizar ciertas acciones en funcion de
      los eventos. Actualmente, este proyecto abrirá un editor cuando se haga clic en el botón "editar"
      y permitira al usuario colocar su nombre y ocupacion.
+   - La actualización reciente agrega funcionalidad al botón "+". Los usuarios ahora pueden ingresar 
+   sus propias fotos desde direcciones URL externas.
+   - Los usuarios ahora pueden examinar cada foto en su relación de aspecto original haciendo clic 
+   en una imagen para ampliarla.
+   - La funcionalidad "Me gusta" y "Eliminar" se ha actualizado para permitir que los usuarios interactúen 
+   con las publicaciones iniciales.
 2. Diseño Responsivo
    - El sitio web se ha desarrollado siguiendo el primer enfoque de un dispositivo móvil.
    - El sitio web está diseñado para escalar sin problemas en:
