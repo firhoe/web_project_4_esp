@@ -29,6 +29,8 @@ const initialCards = [
 
 const cardsContainer = document.querySelector('.cards__container');
 
+//initiates cards clone
+
 initialCards.forEach(function (item) {
   const cardTemplate = document.querySelector('.card-template').content;
   const cardNode = cardTemplate.querySelector('.card').cloneNode(true);
@@ -51,16 +53,24 @@ initialCards.forEach(function (item) {
 
   //initiates preview image card
   const openPreviewImage = cardNode.querySelector('.card__image');
-  const popupPreviewImage = document.querySelector('.popup_preview_image');
-  const closePreviewImage = popupPreviewImage.querySelector('.popup_preview-close-button');
-
-  function togglePreviewImage() {
-    popupPreviewImage.classList.toggle('popup_opened');
-  }
-
   openPreviewImage.addEventListener('click', togglePreviewImage);
-  closePreviewImage.addEventListener('click', togglePreviewImage);
+
+  cardNode.querySelector('.card__image').addEventListener('click', function () {
+    const popupPreviewImage = document.querySelector('.popup_preview_image');
+    popupPreviewImage.src = item.link;
+  });
+  return cardNode;
 });
+
+//initiates popup preview image card
+
+const popupPreviewImage = document.querySelector('.popup_preview_image');
+const closePreviewImage = popupPreviewImage.querySelector('.popup_preview-close-button');
+
+function togglePreviewImage() {
+  popupPreviewImage.classList.toggle('popup_opened');
+}
+closePreviewImage.addEventListener('click', togglePreviewImage);
 
 // initiates card form
 
