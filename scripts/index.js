@@ -67,7 +67,7 @@ initialCards.forEach(function (item) {
 //initiates popup close preview image card
 
 const popupPreviewImage = document.querySelector('.popup_preview_image');
-const closePreviewImage = popupPreviewImage.querySelector('.popup_preview-close-button');
+const closePreviewImage = popupPreviewImage.querySelector('.popup__preview-close-button');
 
 function togglePreviewImage() {
   popupPreviewImage.classList.toggle('popup_opened');
@@ -96,7 +96,7 @@ submitCardButton.addEventListener('click', handleCardSubmit);
 
 const openAddCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_add_card');
-const closeAddCardButton = popupAddCard.querySelector('.popup_card-close-button');
+const closeAddCardButton = popupAddCard.querySelector('.popup__card-close-button');
 
 function toggleFormAddCard() {
   popupAddCard.classList.toggle('popup_opened');
