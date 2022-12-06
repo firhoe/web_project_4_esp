@@ -37,18 +37,30 @@ initialCards.forEach(function (item) {
   cardsContainer.append(cardNode);
 
   // initiates delete card
-
   const cardDelete = cardNode.querySelector('.card__delete-button');
-  cardDelete.addEventListener('click', (event) => {
+  cardDelete.addEventListener('click', () => {
     cardNode.remove();
   });
 
-  // initiates button like
+  // initiates button like in card
   const likeButtonAnimate = cardNode.querySelector('.card__like-button');
 
   likeButtonAnimate.addEventListener('click', () => {
     likeButtonAnimate.classList.toggle('card__like-button_on');
   });
+
+  //initiates preview image card <- esto fue lo ultimo que agregue!!!
+
+  const openPreviewImage = cardNode.querySelector('.card__image');
+  const popupPreviewImage = document.querySelector('.popup_preview_image');
+  const closePreviewImage = popupPreviewImage.querySelector('.popup_preview-close-button');
+
+  function togglePreviewImage() {
+    popupPreviewImage.classList.toggle('popup__opened');
+  }
+
+  openPreviewImage.addEventListener('click', togglePreviewImage);
+  closePreviewImage.addEventListener('click', togglePreviewImage);
 });
 
 // initiates card form
@@ -73,9 +85,7 @@ submitCardButton.addEventListener('click', handleCardSubmit);
 
 const openAddCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_add_card');
-const closeAddCardButton = popupAddCard.querySelector(
-  '.popup_add-card-close-button'
-);
+const closeAddCardButton = popupAddCard.querySelector('.popup_card-close-button');
 
 function toggleFormAddCard() {
   popupAddCard.classList.toggle('popup_opened');
@@ -84,26 +94,14 @@ function toggleFormAddCard() {
 openAddCardButton.addEventListener('click', toggleFormAddCard);
 closeAddCardButton.addEventListener('click', toggleFormAddCard);
 
-// // initiates delete Cards
-
-// const deleteCard = document.querySelector('.card__delete-button');
-// const cardItem = document.querySelector('.card');
-
-// deleteCard.addEventListener('click', function () {
-//   const removeCard = deleteCard.closest('.card');
-//   removeCard.remove(cardItem);
-// });
-
-// const cardDelete = node.querySelector
-
 // initiates profile editor popup profile Edit
 
 const openFormButton = document.querySelector('.profile__edit-button');
-const popup_edit_profile = document.querySelector('.popup_edit_profile');
-const closeButton = popup_edit_profile.querySelector('.popup__close-button');
+const popupEditProfile = document.querySelector('.popup_edit_profile');
+const closeButton = popupEditProfile.querySelector('.popup__close-button');
 
 function toggleForm() {
-  popup_edit_profile.classList.toggle('popup_opened');
+  popupEditProfile.classList.toggle('popup_opened');
 }
 
 openFormButton.addEventListener('click', toggleForm);
