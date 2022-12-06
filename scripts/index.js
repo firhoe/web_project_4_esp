@@ -53,11 +53,13 @@ initialCards.forEach(function (item) {
 
   //initiates preview image card
   const openPreviewImage = cardNode.querySelector('.card__image');
+  const popupPreviewCaption = document.querySelector('.popup__caption');
   openPreviewImage.addEventListener('click', togglePreviewImage);
 
   cardNode.querySelector('.card__image').addEventListener('click', function () {
     const popupPreviewImage = document.querySelector('.popup__image');
     popupPreviewImage.src = item.link;
+    popupPreviewCaption.textContent = item.name;
   });
   return cardNode;
 });
