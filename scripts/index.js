@@ -49,14 +49,13 @@ initialCards.forEach(function (item) {
     likeButtonAnimate.classList.toggle('card__like-button_on');
   });
 
-  //initiates preview image card <- esto fue lo ultimo que agregue!!!
-
+  //initiates preview image card
   const openPreviewImage = cardNode.querySelector('.card__image');
   const popupPreviewImage = document.querySelector('.popup_preview_image');
   const closePreviewImage = popupPreviewImage.querySelector('.popup_preview-close-button');
 
   function togglePreviewImage() {
-    popupPreviewImage.classList.toggle('popup__opened');
+    popupPreviewImage.classList.toggle('popup_opened');
   }
 
   openPreviewImage.addEventListener('click', togglePreviewImage);
