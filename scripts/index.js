@@ -1,4 +1,4 @@
-// initiates 6 default cards
+// inicia 6 default cards
 
 const initialCards = [
   {
@@ -27,65 +27,73 @@ const initialCards = [
   },
 ];
 
+// Seleccionar contenedor de cartas
 const cardsContainer = document.querySelector('.cards__container');
 
-//initiates cards clone
+// Seleccionar template de las cartas
+const cardTemplate = document.querySelector('.card-template').content;
 
-initialCards.forEach(function (item) {
-  const cardTemplate = document.querySelector('.card-template').content;
-  const cardNode = cardTemplate.querySelector('.card').cloneNode(true);
-  cardNode.querySelector('.card__title').textContent = item.name;
-  cardNode.querySelector('.card__image').src = item.link;
-  cardsContainer.append(cardNode);
-
-  // initiates delete card
-  const cardDelete = cardNode.querySelector('.card__delete-button');
-  cardDelete.addEventListener('click', () => {
-    cardNode.remove();
-  });
-
-  // initiates button like in card
-  const likeButtonAnimate = cardNode.querySelector('.card__like-button');
-
-  likeButtonAnimate.addEventListener('click', () => {
-    likeButtonAnimate.classList.toggle('card__like-button_on');
-  });
-
-  //initiates preview image card
-  const openPreviewImage = cardNode.querySelector('.card__image');
-  const popupPreviewCaption = document.querySelector('.popup__caption');
-  openPreviewImage.addEventListener('click', togglePreviewImage);
-
-  cardNode.querySelector('.card__image').addEventListener('click', function () {
-    const popupPreviewImage = document.querySelector('.popup__image');
-    popupPreviewImage.src = item.link;
-    popupPreviewCaption.textContent = item.name;
-  });
-  return cardNode;
-});
-
-//initiates popup close preview image card
-
+// Seleccionar popupPreviewImage de las cartas
 const popupPreviewImage = document.querySelector('.popup_preview_image');
 const closePreviewImage = popupPreviewImage.querySelector('.popup__preview-close-button');
+
+closePreviewImage.addEventListener('click', togglePreviewImage);
 
 function togglePreviewImage() {
   popupPreviewImage.classList.toggle('popup_opened');
 }
-closePreviewImage.addEventListener('click', togglePreviewImage);
 
-// initiates card form
+// Iterar sobre las cartas existentes y agrega la carta
+initialCards.forEach((item) => {
+  addCard(item);
+});
 
-function handleCardSubmit(e) {
-  e.preventDefault();
-  const placeNameInput = document.querySelector('#popup_input_title');
-  const placeLinkInput = document.querySelector('#popup_input_link');
-  const cardTemplate = document.querySelector('.card-template').content;
-  const cardNode = cardTemplate.querySelector('.card').cloneNode(true);
-  cardNode.querySelector('.card__title').textContent = placeNameInput.value;
-  cardNode.querySelector('.card__image').src = placeLinkInput.value;
-  cardsContainer.prepend(cardNode);
+function togglePreviewImage() {
+  popupPreviewImage.classList.toggle('popup_opened');
+}
+
+function handleCardSubmit(evt) {
+  evt.preventDefault();
+  const item = {
+    name: document.querySelector('#popup_input_title').value,
+    link: document.querySelector('#popup_input_link').value,
+  };
+  addCard(item);
   toggleFormAddCard();
+}
+
+function addCard(item) {
+  // Clonar template card
+  const cardNode = cardTemplate.querySelector('.card').cloneNode(true);
+
+  // Agregar valores a la card
+  cardNode.querySelector('.card__title').textContent = item.name;
+  cardNode.querySelector('.card__image').src = item.link;
+
+  // Events
+  const deleteBtn = cardNode.querySelector('.card__delete-button');
+  deleteBtn.addEventListener('click', () => {
+    cardNode.remove();
+  });
+
+  const likeBtn = cardNode.querySelector('.card__like-button');
+  likeBtn.addEventListener('click', () => {
+    likeBtn.classList.toggle('card__like-button_on');
+  });
+
+  const cardImage = cardNode.querySelector('.card__image');
+  cardImage.addEventListener('click', togglePreviewImage);
+
+  cardNode.querySelector('.card__image').addEventListener('click', function () {
+    const popupImage = document.querySelector('.popup__image');
+    const popupCaption = document.querySelector('.popup__caption');
+
+    popupImage.src = item.link;
+    popupCaption.textContent = item.name;
+  });
+
+  // Agregar carta al contenerdor
+  cardsContainer.prepend(cardNode);
 }
 
 const submitCardButton = document.querySelector('.popup__create-card-button');
@@ -106,7 +114,6 @@ openAddCardButton.addEventListener('click', toggleFormAddCard);
 closeAddCardButton.addEventListener('click', toggleFormAddCard);
 
 // initiates profile editor popup profile Edit
-
 const openFormButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_edit_profile');
 const closeButton = popupEditProfile.querySelector('.popup__close-button');
@@ -128,8 +135,8 @@ const profileAbout = document.querySelector('.profile__profession');
 const inputName = document.getElementById('popup_input_name');
 const inputAbout = document.getElementById('popup_input_about');
 
-function handleFormSubmit(e) {
-  e.preventDefault();
+function handleFormSubmit(evt) {
+  evt.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   toggleForm();
