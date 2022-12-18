@@ -24,7 +24,7 @@
                 <h1 class="profile__user">Jacques Cousteau</h1>
                 <button type="button" class="profile__edit-button"></button>
               </div>
-              <p class="profile__profession">Explorador</p>
+              <p class="profile__profession">Explorer</p>
             </div>
           </div>
           <button type="button" class="profile__add-button"></button>
@@ -51,6 +51,9 @@
                 minlength="2"
                 maxlength="40"
                 required />
+              <span class="popup__field-error popup__field-error_visible" id="profile_name_error"
+                >Por favor, rellena este campo.</span
+              >
               <input
                 type="text"
                 name="about"
@@ -60,6 +63,9 @@
                 minlength="2"
                 maxlength="200"
                 required />
+              <span class="popup__field-error popup__field-error_visible" id="profile_about_error"
+                >Por favor, rellena este campo.</span
+              >
             </div>
             <button type="submit" class="popup__submit-button">Save</button>
           </form>
@@ -81,6 +87,9 @@
                 minlength="2"
                 maxlength="30"
                 required />
+              <span class="popup__field-error popup__field-error_visible" id="place_name_error"
+                >Por favor, rellena este campo.</span
+              >
               <input
                 type="url"
                 name="image-link"
@@ -89,6 +98,9 @@
                 class="popup__input"
                 value
                 required />
+              <span class="popup__field-error popup__field-error_visible" id="place_url_error"
+                >Por favor, introduce una dirección web.</span
+              >
             </div>
             <button type="submit" class="popup__submit-button popup__create-card-button">
               Create
