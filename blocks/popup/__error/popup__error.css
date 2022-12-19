@@ -1,4 +1,4 @@
-.popup__field-error {
+.popup__error {
   color: red;
   font-size: 0.75rem;
   padding: 0 0 0 4px;
@@ -6,6 +6,6 @@
   margin-top: 2px;
 }
 
-.popup__field-error_visible {
+.popup__error_visible {
   opacity: 1;
 }

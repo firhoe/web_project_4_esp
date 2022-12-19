@@ -1,8 +1,6 @@
-.popup__input-container {
+.popup__field {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-bottom: 16px;
   width: 100%;
-  margin-bottom: 30px;
 }

@@ -100,7 +100,7 @@ const submitCardButton = document.querySelector('.popup__create-card-button');
 
 submitCardButton.addEventListener('click', handleCardSubmit);
 
-// initiates popup add Card
+// Abre y cierra popup de agregar carta
 
 const openAddCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_add_card');
@@ -113,7 +113,7 @@ function toggleFormAddCard() {
 openAddCardButton.addEventListener('click', toggleFormAddCard);
 closeAddCardButton.addEventListener('click', toggleFormAddCard);
 
-// initiates profile editor popup profile Edit
+// Abre y cierra popup de Editar Perfil
 const openFormButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_edit_profile');
 const closeButton = popupEditProfile.querySelector('.popup__close-button');
@@ -125,7 +125,7 @@ function toggleForm() {
 openFormButton.addEventListener('click', toggleForm);
 closeButton.addEventListener('click', toggleForm);
 
-// initiates profile editor popup save button
+// Registra Nombre y Ocupacion en popup de Editar perfil
 
 const form = document.querySelector('.popup__form');
 
@@ -143,3 +143,13 @@ function handleFormSubmit(evt) {
 }
 
 form.addEventListener('submit', handleFormSubmit);
+
+// Cierra popups con tecla 'ESC'
+// CREO QUE NO FUNCIONA PQ TENGO 3 FUNCIONES QUE HACEN
+// LO MIISMO PERO CON DIFERENTE NOMBRE MY GOD
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    toggleFormAddCard(popupAddCard);
+  }
+});

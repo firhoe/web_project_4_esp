@@ -24,7 +24,7 @@
                 <h1 class="profile__user">Jacques Cousteau</h1>
                 <button type="button" class="profile__edit-button"></button>
               </div>
-              <p class="profile__profession">Explorer</p>
+              <p class="profile__profession">Explorador</p>
             </div>
           </div>
           <button type="button" class="profile__add-button"></button>
@@ -39,74 +39,74 @@
       <!-- Edit Profile-->
       <section class="popup popup_edit_profile">
         <div class="popup__container">
+          <button type="button" class="popup__close-button"></button>
+          <h3 class="popup__title">Editar Perfil</h3>
           <form class="popup__form" action="#" name="edit" novalidate>
-            <h3 class="popup__title">Edit Profile</h3>
-            <div class="popup__input-container">
+            <label class="popup__field" for="popup_input_name">
               <input
                 type="text"
                 name="name"
-                placeholder="Name"
+                placeholder="Nombre"
                 id="popup_input_name"
                 class="popup__input"
                 minlength="2"
                 maxlength="40"
                 required />
-              <span class="popup__field-error popup__field-error_visible" id="profile_name_error"
+              <span class="popup__error" id="profile_name_error"
                 >Por favor, rellena este campo.</span
               >
+            </label>
+            <label class="popup__field" for="popup_input_about">
               <input
                 type="text"
                 name="about"
-                placeholder="About Me"
+                placeholder="Ocupación"
                 id="popup_input_about"
                 class="popup__input"
                 minlength="2"
                 maxlength="200"
                 required />
-              <span class="popup__field-error popup__field-error_visible" id="profile_about_error"
+              <span class="popup__error" id="profile_about_error"
                 >Por favor, rellena este campo.</span
               >
-            </div>
-            <button type="submit" class="popup__submit-button">Save</button>
+            </label>
+            <button type="submit" class="popup__button">Save</button>
           </form>
-          <button type="button" class="popup__close-button"></button>
         </div>
       </section>
       <!-- Add new place -->
       <section class="popup popup_add_card">
         <div class="popup__container">
+          <button type="button" class="popup__close-button popup__card-close-button"></button>
+          <h3 class="popup__title">Nuevo Lugar</h3>
           <form class="popup__form" action="#" name="place" novalidate>
-            <h3 class="popup__title">New Place</h3>
-            <div class="popup__input-container">
+            <label class="popup__field" for="popup_input_title">
               <input
                 type="text"
                 name="title"
-                placeholder="Title"
+                placeholder="Titulo"
                 id="popup_input_title"
                 class="popup__input"
                 minlength="2"
                 maxlength="30"
                 required />
-              <span class="popup__field-error popup__field-error_visible" id="place_name_error"
-                >Por favor, rellena este campo.</span
-              >
+              <span class="popup__error" id="place_name_error">Por favor, rellena este campo.</span>
+            </label>
+            <label class="popup__field" for="popup_input_link">
               <input
                 type="url"
                 name="image-link"
-                placeholder="Image link"
+                placeholder="Imagen URL"
                 id="popup_input_link"
                 class="popup__input"
                 value
                 required />
-              <span class="popup__field-error popup__field-error_visible" id="place_url_error"
+              <span class="popup__error" id="place_url_error"
                 >Por favor, introduce una dirección web.</span
               >
-            </div>
-            <button type="submit" class="popup__submit-button popup__create-card-button">
-              Create
-            </button>
+            </label>
+            <button type="submit" class="popup__button popup__create-card-button">Create</button>
           </form>
-          <button type="button" class="popup__close-button popup__card-close-button"></button>
         </div>
       </section>
       <!-- Preview Card Images -->
@@ -132,5 +132,6 @@
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
