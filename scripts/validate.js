@@ -7,39 +7,15 @@ enableValidation({
   errorClass: 'popup__error_visible',
 });
 
-//INTENTOS FALLIDOS DE FORMULARIO :(
-
-const formSelector = document.querySelector('.popup__form');
-const inputSelector = formSelector.querySelector('.popup__input');
-const formError = formSelector.querySelector(`.${inputSelector.id}-error`);
-
-const showError = (input, errorMessage) => {
-  input.classList.add('popup__input_type_error');
-  formError.textContent = errorMessage;
-  formError.classList.add('popup__error_visible');
-};
-
-const hideError = (input) => {
-  input.classList.remove('popup__input_type_error');
-  formError.classList.remove('popup__input_type_error');
-  formError.textContent = ' ';
-};
-
-function checkInputValidity() {
-  if (!inputSelector.validity.valid) {
-    showError(formSelector, formSelector.validationMessage);
-  } else {
-    hideError(formSelector);
-  }
+function enableValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement, config);
+  });
 }
-
-formSelector.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-});
-
-formSelector.addEventListener('input', function () {
-  checkInputValidity;
-});
 
 // Función que muestra el elemento erroneo para notificar al usuario
 
@@ -51,6 +27,6 @@ const hideInputError = () => {};
 
 // Función que valida Inputs
 
-//const checkInputValidity = () => {};
+const checkInputValidity = () => {};
 
-//enableValidation();
+enableValidation();

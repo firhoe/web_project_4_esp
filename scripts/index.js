@@ -144,12 +144,22 @@ function handleFormSubmit(evt) {
 
 form.addEventListener('submit', handleFormSubmit);
 
+// EJEMPLO FUNCION UNICA PARA CERRAR Y ABRIR LOS 3 POPUPS
+
+// function close(popup) {
+//   popup.classList.remove("hidden");
+// }
+
+// close(popup);
+// close(popupCards);
+// close(popupPlace);
+
 // Cierra popups con tecla 'ESC'
 // CREO QUE NO FUNCIONA PQ TENGO 3 FUNCIONES QUE HACEN
 // LO MIISMO PERO CON DIFERENTE NOMBRE MY GOD
 
-document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
-    toggleFormAddCard(popupAddCard);
-  }
-});
+// document.addEventListener('keydown', function (evt) {
+//   if (evt.key === 'Escape') {
+//     toggleFormAddCard(popupAddCard);
+//   }
+// });
