@@ -162,21 +162,22 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-// Cerrar popup ups con click en superposicion
-const popUpBackground = document.querySelectorAll('.popup__background');
-console.log(popUpBackground);
+const previewBackground = document.querySelector('#popup__background-preview');
+const editBackground = document.querySelector('#popup__background-edit');
+const addBackground = document.querySelector('#popup__background-add');
 
-popUpBackground.forEach((element) => {
-  element.addEventListener('click', (evt) => {
-    console.log('here');
-    closePopUp(popupAddCard);
-    closePopUp(popupPreviewImage);
-    closePopUp(popupEditProfile);
-  });
+function closeClick(closeAdd) {
+  closePopUp(closeAdd);
+}
+
+previewBackground.addEventListener('click', () => {
+  closeClick(popupPreviewImage);
 });
 
-// popUpBackground.addEventListener('click', (evt) => {
-//   closePopUp(popupAddCard);
-//   closePopUp(popupPreviewImage);
-//   closePopUp(popupEditProfile);
-// });
+editBackground.addEventListener('click', () => {
+  closeClick(popupEditProfile);
+});
+
+addBackground.addEventListener('click', () => {
+  closeClick(popupAddCard);
+});
