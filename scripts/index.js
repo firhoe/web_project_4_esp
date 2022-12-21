@@ -37,29 +37,32 @@ const cardTemplate = document.querySelector('.card-template').content;
 const popupPreviewImage = document.querySelector('.popup_preview_image');
 const closePreviewImage = popupPreviewImage.querySelector('.popup__preview-close-button');
 
-closePreviewImage.addEventListener('click', togglePreviewImage);
-
-function togglePreviewImage() {
-  popupPreviewImage.classList.toggle('popup_opened');
-}
+closePreviewImage.addEventListener('click', () => closePopUp(popupPreviewImage));
 
 // Iterar sobre las cartas existentes y agrega la carta
 initialCards.forEach((item) => {
   addCard(item);
 });
 
-function togglePreviewImage() {
-  popupPreviewImage.classList.toggle('popup_opened');
-}
-
 function handleCardSubmit(evt) {
   evt.preventDefault();
+  const nameElement = document.querySelector('#popup_input_title');
+  const linkElement = document.querySelector('#popup_input_link');
   const item = {
-    name: document.querySelector('#popup_input_title').value,
-    link: document.querySelector('#popup_input_link').value,
+    name: nameElement.value,
+    link: linkElement.value,
   };
+
+  if (!nameElement.validity.valid) {
+    return;
+  }
+
+  if (!linkElement.validity.valid) {
+    return;
+  }
+
   addCard(item);
-  toggleFormAddCard();
+  closePopUp(popupAddCard);
 }
 
 function addCard(item) {
@@ -82,7 +85,7 @@ function addCard(item) {
   });
 
   const cardImage = cardNode.querySelector('.card__image');
-  cardImage.addEventListener('click', togglePreviewImage);
+  cardImage.addEventListener('click', () => openPopUp(popupPreviewImage));
 
   cardNode.querySelector('.card__image').addEventListener('click', function () {
     const popupImage = document.querySelector('.popup__image');
@@ -100,32 +103,23 @@ const submitCardButton = document.querySelector('.popup__create-card-button');
 
 submitCardButton.addEventListener('click', handleCardSubmit);
 
-// Abre y cierra popup de agregar carta
-
+// initiates popup add Card
 const openAddCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_add_card');
 const closeAddCardButton = popupAddCard.querySelector('.popup__card-close-button');
 
-function toggleFormAddCard() {
-  popupAddCard.classList.toggle('popup_opened');
-}
+openAddCardButton.addEventListener('click', () => openPopUp(popupAddCard));
+closeAddCardButton.addEventListener('click', () => closePopUp(popupAddCard));
 
-openAddCardButton.addEventListener('click', toggleFormAddCard);
-closeAddCardButton.addEventListener('click', toggleFormAddCard);
-
-// Abre y cierra popup de Editar Perfil
+// initiates profile editor popup profile Edit
 const openFormButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_edit_profile');
 const closeButton = popupEditProfile.querySelector('.popup__close-button');
 
-function toggleForm() {
-  popupEditProfile.classList.toggle('popup_opened');
-}
+openFormButton.addEventListener('click', () => openPopUp(popupEditProfile));
+closeButton.addEventListener('click', () => closePopUp(popupEditProfile));
 
-openFormButton.addEventListener('click', toggleForm);
-closeButton.addEventListener('click', toggleForm);
-
-// Registra Nombre y Ocupacion en popup de Editar perfil
+// initiates profile editor popup save button
 
 const form = document.querySelector('.popup__form');
 
@@ -137,29 +131,52 @@ const inputAbout = document.getElementById('popup_input_about');
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
+  if (!inputName.validity.valid) {
+    return;
+  }
+
+  if (!inputAbout.validity.valid) {
+    return;
+  }
+
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
-  toggleForm();
+  closePopUp(popupEditProfile);
 }
 
 form.addEventListener('submit', handleFormSubmit);
 
-// EJEMPLO FUNCION UNICA PARA CERRAR Y ABRIR LOS 3 POPUPS
+function openPopUp(htmlObj) {
+  htmlObj.classList.add('popup_opened');
+}
 
-// function close(popup) {
-//   popup.classList.remove("hidden");
-// }
+function closePopUp(htmlObj) {
+  htmlObj.classList.remove('popup_opened');
+}
 
-// close(popup);
-// close(popupCards);
-// close(popupPlace);
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    closePopUp(popupAddCard);
+    closePopUp(popupPreviewImage);
+    closePopUp(popupEditProfile);
+  }
+});
 
-// Cierra popups con tecla 'ESC'
-// CREO QUE NO FUNCIONA PQ TENGO 3 FUNCIONES QUE HACEN
-// LO MIISMO PERO CON DIFERENTE NOMBRE MY GOD
+// Cerrar popup ups con click en superposicion
+const popUpBackground = document.querySelectorAll('.popup__background');
+console.log(popUpBackground);
 
-// document.addEventListener('keydown', function (evt) {
-//   if (evt.key === 'Escape') {
-//     toggleFormAddCard(popupAddCard);
-//   }
+popUpBackground.forEach((element) => {
+  element.addEventListener('click', (evt) => {
+    console.log('here');
+    closePopUp(popupAddCard);
+    closePopUp(popupPreviewImage);
+    closePopUp(popupEditProfile);
+  });
+});
+
+// popUpBackground.addEventListener('click', (evt) => {
+//   closePopUp(popupAddCard);
+//   closePopUp(popupPreviewImage);
+//   closePopUp(popupEditProfile);
 // });
