@@ -9,7 +9,7 @@
   line-height: 1.2;
   margin-top: 40px;
   min-height: 50px;
-  transition: all 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .popup__button:hover {
