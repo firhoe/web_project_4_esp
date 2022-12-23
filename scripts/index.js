@@ -46,8 +46,8 @@ initialCards.forEach((item) => {
 
 function handleCardSubmit(evt) {
   evt.preventDefault();
-  const nameElement = document.querySelector('#popup_input_title');
-  const linkElement = document.querySelector('#popup_input_link');
+  const nameElement = document.querySelector('#popup-input-title');
+  const linkElement = document.querySelector('#popup-input-link');
   const item = {
     name: nameElement.value,
     link: linkElement.value,
