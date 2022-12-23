@@ -126,8 +126,8 @@ const form = document.querySelector('.popup__form');
 const profileName = document.querySelector('.profile__user');
 const profileAbout = document.querySelector('.profile__profession');
 
-const inputName = document.getElementById('popup_input_name');
-const inputAbout = document.getElementById('popup_input_about');
+const inputName = document.getElementById('popup-input-name');
+const inputAbout = document.getElementById('popup-input-about');
 
 function handleFormSubmit(evt) {
   evt.preventDefault();
