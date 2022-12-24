@@ -134,11 +134,9 @@ function handleFormSubmit(evt) {
   if (!inputName.validity.valid) {
     return;
   }
-
   if (!inputAbout.validity.valid) {
     return;
   }
-
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
   closePopUp(popupEditProfile);
@@ -148,10 +146,12 @@ form.addEventListener('submit', handleFormSubmit);
 
 function openPopUp(htmlObj) {
   htmlObj.classList.add('popup_opened');
+  document.addEventListener('keydown', escKey);
 }
 
 function closePopUp(htmlObj) {
   htmlObj.classList.remove('popup_opened');
+  document.removeEventListener('keydown', escKey);
 }
 
 function escKey(evt) {
@@ -160,10 +160,7 @@ function escKey(evt) {
     closePopUp(popupPreviewImage);
     closePopUp(popupEditProfile);
   }
-  document.removeEventListener('keydown', escKey);
 }
-
-document.addEventListener('keydown', escKey);
 
 const previewBackground = document.querySelector('#popup__background-preview');
 const editBackground = document.querySelector('#popup__background-edit');
