@@ -154,13 +154,16 @@ function closePopUp(htmlObj) {
   htmlObj.classList.remove('popup_opened');
 }
 
-document.addEventListener('keydown', function (evt) {
+function escKey(evt) {
   if (evt.key === 'Escape') {
     closePopUp(popupAddCard);
     closePopUp(popupPreviewImage);
     closePopUp(popupEditProfile);
   }
-});
+  document.removeEventListener('keydown', escKey);
+}
+
+document.addEventListener('keydown', escKey);
 
 const previewBackground = document.querySelector('#popup__background-preview');
 const editBackground = document.querySelector('#popup__background-edit');
