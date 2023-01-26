@@ -1,8 +1,9 @@
-import {initialCards} from './scripts/utils.js';
+import {initialCards, selectors} from './scripts/utils.js';
 import Card from './scripts/Card.js';
 import Popup from './scripts/Popup.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
+import FormValidator from './scripts/FormValidator.js';
 
 const cardList = document.querySelector('.cards__container');
 
@@ -14,6 +15,25 @@ initialCards.forEach((item) => {
   cardList.appendChild(cardElement);
 });
 
+const validate = new FormValidator({});
+validate.enableValidation();
+const formularios = Array.from(document.querySelectorAll('.popup__container'));
+formularios.forEach((elemento) => {
+  elemento.addEventListener('input', (evt) => {
+    validate.enableValidation();
+  });
+});
+
+const cards = document.querySelectorAll('.card__image');
+cards.forEach((card) => {
+  card.addEventListener('click', (evt) => {
+    previewPopup.open({
+      title: evt.target.alt,
+      image: evt.target.src,
+    });
+  });
+});
+
 const addCardPopup = new Popup('.popup_add_card');
 addCardPopup.setEventListeners();
 
@@ -23,7 +43,14 @@ addCardButton.addEventListener('click', () => addCardPopup.open());
 const closeAddCardButton = addCardPopup._popupElement.querySelector('.popup__card-close-button');
 closeAddCardButton.addEventListener('click', () => addCardPopup.close());
 
-const editPopup = new PopupWithForm('.popup_edit_profile');
+function updateUserInfo(inputValues) {
+  document.getElementById('popup-input-name').textContent = inputValues.name;
+  document.getElementById('popup-input-about').textContent = inputValues.occupation;
+}
+
+const editPopup = new PopupWithForm('.popup_edit_profile', (inputValues) => {
+  updateUserInfo(inputValues);
+});
 
 const editButton = document.querySelector('.profile__edit-button');
 editButton.addEventListener('click', () => {
@@ -35,15 +62,12 @@ editPopup.setEventListeners();
 const previewPopup = new PopupWithImage('.popup_preview_image');
 previewPopup.setEventListeners();
 
-const cards = document.querySelectorAll('.card__image');
-cards.forEach((card) => {
-  card.addEventListener('click', (evt) => {
-    previewPopup.open({
-      title: evt.target.alt,
-      image: evt.target.src,
-    });
-  });
-});
+const form = document.querySelector('.popup__form');
+
+const formValidatorEditProfile = new FormValidator(form, selectors);
+formValidatorEditProfile.enableValidation();
+
+///////////////////////////// INDEX.JS ANTIGUO ///////////////////////////////////
 
 // // Seleccionar contenedor de cartas
 // const cardsContainer = document.querySelector('.cards__container');
