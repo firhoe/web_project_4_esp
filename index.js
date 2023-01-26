@@ -2,29 +2,19 @@ import {initialCards, selectors} from './scripts/utils.js';
 import Card from './scripts/Card.js';
 import Popup from './scripts/Popup.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
-import FormValidator from './scripts/FormValidator.js';
 
 const cardList = document.querySelector('.cards__container');
+const cards = document.querySelectorAll('.card');
+export const popUp = document.querySelectorAll('.popup'); // esta variable se importa a Popup.js
 
-export const popUp = document.querySelectorAll('.popup');
-
+// este forEach hace que las 6 tarjetas iniciales aparescan, tiene habilitado el boton like y eliminar card
 initialCards.forEach((item) => {
   const newCard = new Card(item.name, item.link, '.card-template');
   const cardElement = newCard.generateCard();
   cardList.appendChild(cardElement);
 });
 
-const validate = new FormValidator({});
-validate.enableValidation();
-const formularios = Array.from(document.querySelectorAll('.popup__container'));
-formularios.forEach((elemento) => {
-  elemento.addEventListener('input', (evt) => {
-    validate.enableValidation();
-  });
-});
-
-const cards = document.querySelectorAll('.card__image');
+//este codigo agrega el evento de click a cada elemento card que ejecuta funcion previewPopup
 cards.forEach((card) => {
   card.addEventListener('click', (evt) => {
     previewPopup.open({
@@ -37,35 +27,8 @@ cards.forEach((card) => {
 const addCardPopup = new Popup('.popup_add_card');
 addCardPopup.setEventListeners();
 
-const addCardButton = document.querySelector('.profile__add-button');
-addCardButton.addEventListener('click', () => addCardPopup.open());
-
-const closeAddCardButton = addCardPopup._popupElement.querySelector('.popup__card-close-button');
-closeAddCardButton.addEventListener('click', () => addCardPopup.close());
-
-function updateUserInfo(inputValues) {
-  document.getElementById('popup-input-name').textContent = inputValues.name;
-  document.getElementById('popup-input-about').textContent = inputValues.occupation;
-}
-
-const editPopup = new PopupWithForm('.popup_edit_profile', (inputValues) => {
-  updateUserInfo(inputValues);
-});
-
-const editButton = document.querySelector('.profile__edit-button');
-editButton.addEventListener('click', () => {
-  editPopup.open();
-});
-
-editPopup.setEventListeners();
-
 const previewPopup = new PopupWithImage('.popup_preview_image');
 previewPopup.setEventListeners();
-
-const form = document.querySelector('.popup__form');
-
-const formValidatorEditProfile = new FormValidator(form, selectors);
-formValidatorEditProfile.enableValidation();
 
 ///////////////////////////// INDEX.JS ANTIGUO ///////////////////////////////////
 
