@@ -9,8 +9,10 @@ export default class FormValidator {
   }
 
   _showInputError(input, errorMessage) {
+    console.log(input);
     const errorElement = this._form.querySelector(`#${input.id}-error`);
     input.classList.add(this._inputErrorClass);
+    console.log(errorElement);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
   }
@@ -45,7 +47,7 @@ export default class FormValidator {
     }
   }
 
-  twiceFunctions(formElement, inputElement, inputList, buttonElement, selectors) {
+  doubleFunctions(formElement, inputElement, inputList, buttonElement, selectors) {
     this._checkInputValidity(formElement, inputElement, selectors);
     this._toggleButtonState(inputList, buttonElement, selectors);
   }
@@ -53,13 +55,12 @@ export default class FormValidator {
   _setEventListeners(formElement, selectors) {
     const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
     const buttonElement = formElement.querySelector(selectors.submitButtonSelector);
-    this._toggleButtonState(inputList, buttonElement, this._selectors);
+    this._toggleButtonState(inputList, buttonElement, selectors);
 
     inputList.forEach((inputElement) => {
-      inputElement.addEventListener(
-        'input',
-        this.twiceFunctions(formElement, inputElement, inputList, buttonElement, selectors)
-      );
+      inputElement.addEventListener('input', () => {
+        this.doubleFunctions(formElement, inputElement, inputList, buttonElement, selectors);
+      });
     });
   }
 

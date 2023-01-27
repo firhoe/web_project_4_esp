@@ -44,7 +44,16 @@ export const popUp = document.querySelectorAll('.popup');
 export const form = document.querySelector('.popup__form');
 export const formsElements = document.querySelectorAll('.popup__form');
 
+// Eventos
+
 // Funciones
+
+export function updateUserInfo(inputValues) {
+  console.log(inputValues);
+  document.querySelector('.profile__user').textContent = inputValues.name;
+  document.querySelector('.profile__profession').textContent = inputValues.about;
+  console.log(inputValues);
+}
 
 export function handleEditSubmit(event) {
   event.preventDefault();
@@ -56,22 +65,17 @@ export function handleEditSubmit(event) {
   editPopup.close();
 }
 
-export function handleAddCardSubmit(event) {
-  event.preventDefault();
-  console.log(form); // no se que esta agarrando :(
-  const name = form.elements.name.value;
-  const link = form.elements.link.value;
-  addNewCard(name, link);
-  addCardPopup.close();
-}
+// export function addNewCard(name, link) {
+//   const newCard = new Card(name, link, '.card-template');
+//   const cardElement = newCard.generateCard();
+//   cardList.appendChild(cardElement);
+// }
 
-export function updateUserInfo(inputValues) {
-  document.querySelector('.profile__user').textContent = inputValues.name;
-  document.querySelector('.profile__profession').textContent = inputValues.about;
-}
-
-export function addNewCard(name, link) {
-  const newCard = new Card(name, link, '.card-template');
-  const cardElement = newCard.generateCard();
-  cardList.appendChild(cardElement);
-}
+// export function handleAddCardSubmit(event) {
+//   event.preventDefault();
+//   console.log(form);
+//   const name = form.elements.name.value;
+//   const link = form.elements.link.value;
+//   addNewCard(name, link);
+//   addCardPopup.close();
+// }

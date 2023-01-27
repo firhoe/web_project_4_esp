@@ -62,13 +62,6 @@ addCardPopup.setEventListeners();
 editPopup.setEventListeners();
 previewPopup.setEventListeners();
 
-// const forms = Array.from(document.querySelectorAll('.popup__container'));
-// forms.forEach((elemento) => {
-//   elemento.addEventListener('input', (evt) => {
-//     formValidator.enableValidation();
-//   });
-// });
-
 // form.addEventListener('submit', handleEditSubmit);
 // form.addEventListener('submit', handleAddCardSubmit);
 
