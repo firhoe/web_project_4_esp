@@ -1,11 +1,22 @@
-import {initialCards, selectors} from './scripts/utils.js';
+import {
+  initialCards,
+  selectors,
+  cardList,
+  form,
+  updateUserInfo,
+  handleEditSubmit,
+  handleAddCardSubmit,
+} from './scripts/utils.js';
 import Card from './scripts/Card.js';
 import Popup from './scripts/Popup.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
+import PopupWithForm from './scripts/PopupWithForm.js';
+import FormValidator from './scripts/FormValidator.js';
 
-const cardList = document.querySelector('.cards__container');
-const cards = document.querySelectorAll('.card');
-export const popUp = document.querySelectorAll('.popup'); // esta variable se importa a Popup.js
+const addCardPopup = new Popup('.popup_add_card');
+const previewPopup = new PopupWithImage('.popup_preview_image');
+export const editPopup = new PopupWithForm('.popup_edit_profile', updateUserInfo);
+const formValidator = new FormValidator(selectors);
 
 // este forEach hace que las 6 tarjetas iniciales aparescan, tiene habilitado el boton like y eliminar card
 initialCards.forEach((item) => {
@@ -14,21 +25,34 @@ initialCards.forEach((item) => {
   cardList.appendChild(cardElement);
 });
 
-//este codigo agrega el evento de click a cada elemento card que ejecuta funcion previewPopup
-cards.forEach((card) => {
-  card.addEventListener('click', (evt) => {
-    previewPopup.open({
-      title: evt.target.alt,
-      image: evt.target.src,
-    });
+previewPopup.setEventListeners();
+addCardPopup.setEventListeners();
+editPopup.setEventListeners();
+formValidator.enableValidation();
+
+const addCardButton = document.querySelector('.profile__add-button');
+addCardButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  addCardPopup.open();
+});
+
+const closeAddCardButton = addCardPopup._popupElement.querySelector('.popup__card-close-button');
+closeAddCardButton.addEventListener('click', () => addCardPopup.close());
+
+const editButton = document.querySelector('.profile__edit-button');
+editButton.addEventListener('click', () => {
+  editPopup.open();
+});
+
+const forms = Array.from(document.querySelectorAll('.popup__container'));
+forms.forEach((elemento) => {
+  elemento.addEventListener('input', (evt) => {
+    formValidator.enableValidation();
   });
 });
 
-const addCardPopup = new Popup('.popup_add_card');
-addCardPopup.setEventListeners();
-
-const previewPopup = new PopupWithImage('.popup_preview_image');
-previewPopup.setEventListeners();
+form.addEventListener('submit', handleEditSubmit);
+form.addEventListener('submit', handleAddCardSubmit);
 
 ///////////////////////////// INDEX.JS ANTIGUO ///////////////////////////////////
 
