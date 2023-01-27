@@ -1,22 +1,18 @@
-import {
-  initialCards,
-  selectors,
-  cardList,
-  form,
-  updateUserInfo,
-  handleEditSubmit,
-  handleAddCardSubmit,
-} from './scripts/utils.js';
+import {initialCards, selectors, cardList, formsElements, updateUserInfo} from './scripts/utils.js';
 import Card from './scripts/Card.js';
 import Popup from './scripts/Popup.js';
-import PopupWithImage from './scripts/PopupWithImage.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import FormValidator from './scripts/FormValidator.js';
+import previewPopup from './scripts/PopupWithImage.js';
 
 const addCardPopup = new Popup('.popup_add_card');
-const previewPopup = new PopupWithImage('.popup_preview_image');
+
 export const editPopup = new PopupWithForm('.popup_edit_profile', updateUserInfo);
-const formValidator = new FormValidator(selectors);
+
+formsElements.forEach((form) => {
+  const formValidator = new FormValidator(form, selectors);
+  formValidator.enableValidation();
+});
 
 // este forEach hace que las 6 tarjetas iniciales aparescan, tiene habilitado el boton like y eliminar card
 initialCards.forEach((item) => {
@@ -25,34 +21,41 @@ initialCards.forEach((item) => {
   cardList.appendChild(cardElement);
 });
 
-previewPopup.setEventListeners();
-addCardPopup.setEventListeners();
-editPopup.setEventListeners();
-formValidator.enableValidation();
-
+// abrir formulario agregar tarjeta
 const addCardButton = document.querySelector('.profile__add-button');
 addCardButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   addCardPopup.open();
 });
 
-const closeAddCardButton = addCardPopup._popupElement.querySelector('.popup__card-close-button');
-closeAddCardButton.addEventListener('click', () => addCardPopup.close());
-
+// abrir formulario editar perfil
 const editButton = document.querySelector('.profile__edit-button');
-editButton.addEventListener('click', () => {
+editButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   editPopup.open();
 });
 
-const forms = Array.from(document.querySelectorAll('.popup__container'));
-forms.forEach((elemento) => {
-  elemento.addEventListener('input', (evt) => {
-    formValidator.enableValidation();
-  });
-});
+// cerrar formulario agregar card
+const closeAddCardButton = addCardPopup._popupElement.querySelector('.popup__card-close-button');
+closeAddCardButton.addEventListener('click', () => addCardPopup.close());
 
-form.addEventListener('submit', handleEditSubmit);
-form.addEventListener('submit', handleAddCardSubmit);
+// cerrar formulario editar perfil
+const closeEditProfile = editPopup._popupElement.querySelector('.popup__close-button');
+closeEditProfile.addEventListener('click', () => editPopup.close());
+
+// cerrar popupPreviewImage
+const closePreviewImage = previewPopup._popupElement.querySelector('.popup__preview-close-button');
+closePreviewImage.addEventListener('click', () => previewPopup.close());
+
+// const forms = Array.from(document.querySelectorAll('.popup__container'));
+// forms.forEach((elemento) => {
+//   elemento.addEventListener('input', (evt) => {
+//     formValidator.enableValidation();
+//   });
+// });
+
+// form.addEventListener('submit', handleEditSubmit);
+// form.addEventListener('submit', handleAddCardSubmit);
 
 ///////////////////////////// INDEX.JS ANTIGUO ///////////////////////////////////
 

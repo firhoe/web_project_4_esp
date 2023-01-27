@@ -1,3 +1,5 @@
+import previewPopup from './PopupWithImage.js';
+
 export default class Card {
   constructor(name, link, cardSelector) {
     this._name = name;
@@ -30,6 +32,12 @@ export default class Card {
     this._cardElement
       .querySelector('.card__delete-button')
       .addEventListener('click', () => this._deleteButton());
+    this._cardElement.querySelector('.card__image').addEventListener('click', (evt) => {
+      previewPopup.open({
+        title: evt.target.alt,
+        image: evt.target.src,
+      });
+    });
   }
 
   generateCard() {

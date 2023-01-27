@@ -7,7 +7,6 @@ export default class FormValidator {
     this._inputErrorClass = selectors.inputErrorClass;
     this._errorClass = selectors.errorClass;
   }
-  ggit;
 
   _showInputError(input, errorMessage) {
     const errorElement = this._form.querySelector(`#${input.id}-error`);

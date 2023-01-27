@@ -42,19 +42,7 @@ export const selectors = {
 export const cardList = document.querySelector('.cards__container');
 export const popUp = document.querySelectorAll('.popup');
 export const form = document.querySelector('.popup__form');
-const cards = document.querySelectorAll('.card');
-
-// Eventos
-
-cards.forEach((card) => {
-  card.addEventListener('click', (evt) => {
-    console.log('Card clicked');
-    previewPopup.open({
-      title: evt.target.alt,
-      image: evt.target.src,
-    });
-  });
-});
+export const formsElements = document.querySelectorAll('.popup__form');
 
 // Funciones
 
