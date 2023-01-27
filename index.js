@@ -47,6 +47,21 @@ closeEditProfile.addEventListener('click', () => editPopup.close());
 const closePreviewImage = previewPopup._popupElement.querySelector('.popup__preview-close-button');
 closePreviewImage.addEventListener('click', () => previewPopup.close());
 
+// variables para agarrar los backgrounds de cada popup
+const previewBackground = document.querySelector('#popup__background-preview');
+const editBackground = document.querySelector('#popup__background-edit');
+const addBackground = document.querySelector('#popup__background-add');
+
+// agregar evento de popup para que se cierre formulario si haces click fuera de el
+previewBackground.addEventListener('click', () => previewPopup.close());
+editBackground.addEventListener('click', () => editPopup.close());
+addBackground.addEventListener('click', () => addCardPopup.close());
+
+// llamas a los eventos para que cierren los popups si haces click fuera de el
+addCardPopup.setEventListeners();
+editPopup.setEventListeners();
+previewPopup.setEventListeners();
+
 // const forms = Array.from(document.querySelectorAll('.popup__container'));
 // forms.forEach((elemento) => {
 //   elemento.addEventListener('input', (evt) => {
