@@ -44,15 +44,11 @@ export const popUp = document.querySelectorAll('.popup');
 export const form = document.querySelector('.popup__form');
 export const formsElements = document.querySelectorAll('.popup__form');
 
-// Eventos
-
 // Funciones
 
 export function updateUserInfo(inputValues) {
-  console.log(inputValues);
   document.querySelector('.profile__user').textContent = inputValues.name;
   document.querySelector('.profile__profession').textContent = inputValues.about;
-  console.log(inputValues);
 }
 
 export function handleEditSubmit(event) {
