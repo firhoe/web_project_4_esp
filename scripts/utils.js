@@ -61,17 +61,16 @@ export function handleEditSubmit(event) {
   editPopup.close();
 }
 
-// export function addNewCard(name, link) {
-//   const newCard = new Card(name, link, '.card-template');
-//   const cardElement = newCard.generateCard();
-//   cardList.appendChild(cardElement);
-// }
+function addNewCard(name, link) {
+  const newCard = new Card(name, link, '.card-template');
+  const cardElement = newCard.generateCard();
+  cardList.prepend(cardElement);
+}
 
-// export function handleAddCardSubmit(event) {
-//   event.preventDefault();
-//   console.log(form);
-//   const name = form.elements.name.value;
-//   const link = form.elements.link.value;
-//   addNewCard(name, link);
-//   addCardPopup.close();
-// }
+export function handleAddCardSubmit() {
+  const addFormCard = document.querySelector('#form-card');
+  const inputname = addFormCard.querySelector('#popup-input-title').value;
+  const inputlink = addFormCard.querySelector('#popup-input-link').value;
+
+  addNewCard(inputname, inputlink);
+}

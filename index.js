@@ -6,6 +6,7 @@ import {
   formsElements,
   updateUserInfo,
   handleEditSubmit,
+  handleAddCardSubmit,
 } from './scripts/utils.js';
 import Card from './scripts/Card.js';
 import Popup from './scripts/Popup.js';
@@ -70,5 +71,9 @@ addCardPopup.setEventListeners();
 editPopup.setEventListeners();
 previewPopup.setEventListeners();
 
+//
+const addFormCard = document.querySelector('#form-card');
 form.addEventListener('submit', handleEditSubmit);
-// form.addEventListener('submit', handleAddCardSubmit);
+addFormCard.addEventListener('submit', () => {
+  handleAddCardSubmit();
+});
