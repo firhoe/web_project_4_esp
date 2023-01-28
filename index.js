@@ -14,7 +14,7 @@ import PopupWithForm from './scripts/PopupWithForm.js';
 import FormValidator from './scripts/FormValidator.js';
 import previewPopup from './scripts/PopupWithImage.js';
 
-const addCardPopup = new Popup('.popup_add_card');
+export const addCardPopup = new Popup('.popup_add_card');
 
 export const editPopup = new PopupWithForm('.popup_edit_profile', updateUserInfo);
 
@@ -71,7 +71,7 @@ addCardPopup.setEventListeners();
 editPopup.setEventListeners();
 previewPopup.setEventListeners();
 
-//
+// está asociando dos eventos "submit" a dos elementos diferentes del DOM
 const addFormCard = document.querySelector('#form-card');
 form.addEventListener('submit', handleEditSubmit);
 addFormCard.addEventListener('submit', () => {

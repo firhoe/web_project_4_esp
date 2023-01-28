@@ -1,5 +1,5 @@
 import Card from './Card.js';
-import {editPopup} from '../index.js';
+import {editPopup, addCardPopup} from '../index.js';
 
 export const initialCards = [
   {
@@ -61,7 +61,7 @@ export function handleEditSubmit(event) {
   editPopup.close();
 }
 
-function addNewCard(name, link) {
+export function addNewCard(name, link) {
   const newCard = new Card(name, link, '.card-template');
   const cardElement = newCard.generateCard();
   cardList.prepend(cardElement);
@@ -73,4 +73,5 @@ export function handleAddCardSubmit() {
   const inputlink = addFormCard.querySelector('#popup-input-link').value;
 
   addNewCard(inputname, inputlink);
+  addCardPopup.close();
 }
