@@ -59,6 +59,7 @@ export function handleEditSubmit(event) {
   };
   updateUserInfo(inputValues);
   editPopup.close();
+  resetForm(form);
 }
 
 export function addNewCard(name, link) {
@@ -74,4 +75,9 @@ export function handleAddCardSubmit() {
 
   addNewCard(inputname, inputlink);
   addCardPopup.close();
+  resetForm(addFormCard);
+}
+
+function resetForm(form) {
+  form.reset();
 }
