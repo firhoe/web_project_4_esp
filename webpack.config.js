@@ -41,12 +41,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
+        test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf|ico)$/,
         type: 'asset/resource',
-      },
-      {
-        test: /\.(ico)$/,
-        use: 'file-loader?name=assets/[name].[ext]',
       },
     ],
   },
