@@ -7,18 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Alrededor de los EEUU</title>
   </head>
   <body>
     <div class="page">
       <header class="header">
-        <img src="./images/logo.svg" alt="Logo Around the US" class="header__logo" />
+        <img
+          src="<%=require('./images/logo.svg')%>"
+          alt="Logo Around the US"
+          class="header__logo" />
       </header>
       <main class="content">
         <section class="profile">
           <div class="profile__container">
-            <img src="./images/imageprofile-pic.jpg" alt="Profile Pic" class="profile__image" />
+            <img
+              src="<%=require('./images/imageprofile-pic.jpg')%>"
+              alt="Profile Pic"
+              class="profile__image" />
             <div class="profile__information">
               <div class="profile__wrap">
                 <h1 class="profile__user">Jacques Cousteau</h1>
@@ -136,9 +141,5 @@
         </div>
       </li>
     </template>
-    <script src="./index.js" type="module"></script>
-    <script src="./scripts/utils.js" type="module"></script>
-    <script src="./scripts/Popup.js" type="module"></script>
-    <script src="./scripts/FormValidator.js" type="module"></script>
   </body>
 </html>

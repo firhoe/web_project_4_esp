@@ -44,11 +44,16 @@ module.exports = {
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: 'asset/resource',
       },
+      {
+        test: /\.(ico)$/,
+        use: 'file-loader?name=assets/[name].[ext]',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      favicon: './src/images/favicon.ico',
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
