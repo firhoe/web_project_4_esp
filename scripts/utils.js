@@ -59,7 +59,7 @@ export function handleEditSubmit(event) {
   };
   updateUserInfo(inputValues);
   editPopup.close();
-  resetForm(form);
+  event.target.reset();
 }
 
 export function addNewCard(name, link) {
@@ -68,16 +68,13 @@ export function addNewCard(name, link) {
   cardList.prepend(cardElement);
 }
 
-export function handleAddCardSubmit() {
+export function handleAddCardSubmit(event) {
+  event.preventDefault();
   const addFormCard = document.querySelector('#form-card');
   const inputname = addFormCard.querySelector('#popup-input-title').value;
   const inputlink = addFormCard.querySelector('#popup-input-link').value;
 
   addNewCard(inputname, inputlink);
   addCardPopup.close();
-  resetForm(addFormCard);
-}
-
-function resetForm(form) {
-  form.reset();
+  event.target.reset();
 }

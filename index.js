@@ -1,7 +1,6 @@
 import {
   initialCards,
   selectors,
-  cardList,
   form,
   formsElements,
   updateUserInfo,
@@ -13,18 +12,37 @@ import Popup from './scripts/Popup.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import FormValidator from './scripts/FormValidator.js';
 import previewPopup from './scripts/PopupWithImage.js';
+import Section from './scripts/Section.js';
+import UserInfo from './scripts/UserInfo.js';
 
 export const addCardPopup = new Popup('.popup_add_card');
 
 export const editPopup = new PopupWithForm('.popup_edit_profile', updateUserInfo);
 
-// este forEach hace que las 6 tarjetas iniciales aparescan, tiene habilitado el boton like y eliminar card
-initialCards.forEach((item) => {
-  const newCard = new Card(item.name, item.link, '.card-template');
-  const cardElement = newCard.generateCard();
-  cardList.appendChild(cardElement);
+// renderiza las 6 tarjetas iniciales aparescan, tiene habilitado el boton like y eliminar card
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const newCard = new Card(item.name, item.link, '.card-template');
+      const cardElement = newCard.generateCard();
+      cardSection.addItem(cardElement);
+    },
+  },
+  '.cards__container'
+);
+
+cardSection.renderer();
+
+// instancia para la clase UserInfo
+const profileUser = new UserInfo({
+  userName: '.profile__user',
+  userOcupation: '.profile__profession',
 });
 
+profileUser.getUserInfo();
+
+// instancia para la clase FormValidator
 formsElements.forEach((form) => {
   const formValidator = new FormValidator(form, selectors);
   formValidator.enableValidation();
@@ -74,6 +92,6 @@ previewPopup.setEventListeners();
 // está asociando dos eventos "submit" a dos elementos diferentes del DOM
 const addFormCard = document.querySelector('#form-card');
 form.addEventListener('submit', handleEditSubmit);
-addFormCard.addEventListener('submit', () => {
-  handleAddCardSubmit();
+addFormCard.addEventListener('submit', (event) => {
+  handleAddCardSubmit(event);
 });
