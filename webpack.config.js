@@ -1,4 +1,3 @@
-// webpack.config.js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
@@ -7,13 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   devtool: 'inline-source-map',
   entry: {
-    app: './index.js',
+    main: './src/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name].js',
+    filename: 'main.js',
     publicPath: '',
-    assetModuleFilename: 'images/[name][ext][query]',
   },
   target: ['web', 'es5'],
   stats: {children: true},
@@ -37,9 +35,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
+            options: {importLoaders: 1},
           },
           'postcss-loader',
         ],
@@ -52,10 +48,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      inject: true,
-      template: './index.html',
-      filename: `index.html`,
-      chunks: ['app'],
+      template: './src/index.html',
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),

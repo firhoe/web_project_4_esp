@@ -2,7 +2,7 @@
   "name": "web_project_4_esp",
   "version": "1.0.0",
   "description": "\"Platform Project\"",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
@@ -17,6 +17,9 @@
     "url": "https://github.com/firhoe/web_project_4_esp/issues"
   },
   "homepage": "https://github.com/firhoe/web_project_4_esp#readme",
+  "dependencies": {
+    "core-js": "^3.27.2"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
@@ -31,8 +34,5 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
-  },
-  "dependencies": {
-    "core-js": "^3.27.2"
   }
 }
