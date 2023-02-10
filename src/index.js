@@ -24,8 +24,16 @@ export const editPopup = new PopupWithForm('.popup_edit_profile', updateUserInfo
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const newCard = new Card(item.name, item.link, '.card-template');
+    renderer: (data) => {
+      const newCard = new Card(
+        {
+          data,
+          handleCardClick: ({title, image}) => {
+            previewPopup.open({title, image});
+          },
+        },
+        '.card-template'
+      );
       const cardElement = newCard.generateCard();
       cardSection.addItem(cardElement);
     },
@@ -48,6 +56,26 @@ formsElements.forEach((form) => {
   const formValidator = new FormValidator(form, selectors);
   formValidator.enableValidation();
 });
+
+// crear nueva tarjeta y se configura para enviar el formulario
+export const addNewCard = new PopupWithForm({
+  popupSelector: '.popup_add_card',
+  handleFormSubmit: (data) => {
+    const newCard = new Card(
+      {
+        data,
+        handleCardClick: ({title, image}) => {
+          previewPopup.open({title, image});
+        },
+      },
+      '.card-template'
+    );
+    const cardElement = newCard.generateCard();
+    cardSection.addItem(cardElement);
+  },
+});
+
+addNewCard.setEventListeners();
 
 // abrir formulario agregar tarjeta
 const addCardButton = document.querySelector('.profile__add-button');

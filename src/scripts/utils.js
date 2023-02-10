@@ -1,5 +1,5 @@
-import Card from './Card.js';
-import {editPopup, addCardPopup} from '../index.js';
+//import Card from './Card.js';
+import {editPopup, addCardPopup, addNewCard} from '../index.js';
 
 export const initialCards = [
   {
@@ -60,12 +60,6 @@ export function handleEditSubmit(event) {
   updateUserInfo(inputValues);
   editPopup.close();
   event.target.reset();
-}
-
-export function addNewCard(name, link) {
-  const newCard = new Card(name, link, '.card-template');
-  const cardElement = newCard.generateCard();
-  cardList.prepend(cardElement);
 }
 
 export function handleAddCardSubmit(event) {

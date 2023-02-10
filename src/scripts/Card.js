@@ -1,10 +1,11 @@
-import previewPopup from './PopupWithImage.js';
+//import previewPopup from './PopupWithImage.js';
 
 export default class Card {
-  constructor(name, link, cardSelector) {
-    this._name = name;
-    this._link = link;
+  constructor({data, handleCardClick}, cardSelector) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -31,10 +32,10 @@ export default class Card {
     this._cardElement
       .querySelector('.card__delete-button')
       .addEventListener('click', () => this._deleteButton());
-    this._cardElement.querySelector('.card__image').addEventListener('click', (evt) => {
-      previewPopup.open({
-        title: evt.target.alt,
-        image: evt.target.src,
+    this._cardElement.querySelector('.card__image').addEventListener('click', () => {
+      this._handleCardClick({
+        title: this._name,
+        image: this._link,
       });
     });
   }
