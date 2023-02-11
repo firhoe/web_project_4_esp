@@ -16,12 +16,12 @@ import previewPopup from './scripts/PopupWithImage.js';
 import Section from './scripts/Section.js';
 import UserInfo from './scripts/UserInfo.js';
 
-export const addCardPopup = new Popup('.popup_add_card');
+export const addCardPopup = new PopupWithForm('.popup_add_card', handleAddCardSubmit);
 
 export const editPopup = new PopupWithForm('.popup_edit_profile', updateUserInfo);
 
 // renderiza las 6 tarjetas iniciales aparescan, tiene habilitado el boton like y eliminar card
-const cardSection = new Section(
+export const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
@@ -57,26 +57,6 @@ formsElements.forEach((form) => {
   formValidator.enableValidation();
 });
 
-// crear nueva tarjeta y se configura para enviar el formulario
-export const addNewCard = new PopupWithForm({
-  popupSelector: '.popup_add_card',
-  handleFormSubmit: (data) => {
-    const newCard = new Card(
-      {
-        data,
-        handleCardClick: ({title, image}) => {
-          previewPopup.open({title, image});
-        },
-      },
-      '.card-template'
-    );
-    const cardElement = newCard.generateCard();
-    cardSection.addItem(cardElement);
-  },
-});
-
-addNewCard.setEventListeners();
-
 // abrir formulario agregar tarjeta
 const addCardButton = document.querySelector('.profile__add-button');
 addCardButton.addEventListener('click', (evt) => {
@@ -90,18 +70,6 @@ editButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   editPopup.open();
 });
-
-// cerrar formulario agregar card
-const closeAddCardButton = addCardPopup._popupElement.querySelector('.popup__card-close-button');
-closeAddCardButton.addEventListener('click', () => addCardPopup.close());
-
-// cerrar formulario editar perfil
-const closeEditProfile = editPopup._popupElement.querySelector('.popup__close-button');
-closeEditProfile.addEventListener('click', () => editPopup.close());
-
-// cerrar popupPreviewImage
-const closePreviewImage = previewPopup._popupElement.querySelector('.popup__preview-close-button');
-closePreviewImage.addEventListener('click', () => previewPopup.close());
 
 // variables para agarrar los backgrounds de cada popup
 const previewBackground = document.querySelector('#popup__background-preview');
@@ -117,10 +85,3 @@ addBackground.addEventListener('click', () => addCardPopup.close());
 addCardPopup.setEventListeners();
 editPopup.setEventListeners();
 previewPopup.setEventListeners();
-
-// está asociando dos eventos "submit" a dos elementos diferentes del DOM
-const addFormCard = document.querySelector('#form-card');
-form.addEventListener('submit', handleEditSubmit);
-addFormCard.addEventListener('submit', (event) => {
-  handleAddCardSubmit(event);
-});

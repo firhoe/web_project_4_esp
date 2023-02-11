@@ -1,5 +1,6 @@
-//import Card from './Card.js';
-import {editPopup, addCardPopup, addNewCard} from '../index.js';
+import {editPopup, cardSection} from '../index.js';
+import Card from './Card.js';
+import previewPopup from './PopupWithImage.js';
 
 export const initialCards = [
   {
@@ -63,12 +64,21 @@ export function handleEditSubmit(event) {
 }
 
 export function handleAddCardSubmit(event) {
-  event.preventDefault();
   const addFormCard = document.querySelector('#form-card');
-  const inputname = addFormCard.querySelector('#popup-input-title').value;
-  const inputlink = addFormCard.querySelector('#popup-input-link').value;
+  const name = addFormCard.querySelector('#popup-input-title').value;
+  const link = addFormCard.querySelector('#popup-input-link').value;
 
-  addNewCard(inputname, inputlink);
-  addCardPopup.close();
-  event.target.reset();
+  const data = {name, link};
+  const newCard = new Card(
+    {
+      data,
+      handleCardClick: ({title, image}) => {
+        previewPopup.open({title, image});
+      },
+    },
+    '.card-template'
+  );
+
+  const card = newCard.generateCard();
+  cardSection.addItem(card);
 }
