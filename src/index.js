@@ -2,14 +2,14 @@ import './pages/index.css';
 import {
   initialCards,
   selectors,
-  form,
+  //form,
   formsElements,
   updateUserInfo,
-  handleEditSubmit,
+  //handleEditSubmit,
   handleAddCardSubmit,
 } from './scripts/utils.js';
 import Card from './scripts/Card.js';
-import Popup from './scripts/Popup.js';
+//import Popup from './scripts/Popup.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import FormValidator from './scripts/FormValidator.js';
 import previewPopup from './scripts/PopupWithImage.js';
