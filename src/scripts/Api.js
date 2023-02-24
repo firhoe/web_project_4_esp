@@ -15,7 +15,6 @@ export default class Api {
     const requestOptions = {
       method: 'GET',
       headers: this.getHeaders(),
-      redirect: 'follow',
     };
 
     return fetch(`${this._options.url}/cards`, requestOptions)
@@ -28,7 +27,6 @@ export default class Api {
     const requestOptions = {
       method: 'GET',
       headers: this.getHeaders(),
-      redirect: 'follow',
     };
 
     return fetch(`${this._options.url}/users/me`, requestOptions)
@@ -41,7 +39,6 @@ export default class Api {
     const requestOptions = {
       method: 'PATCH',
       headers: this.getHeaders(),
-      redirect: 'follow',
       body: JSON.stringify({
         name: name,
         about: about,
@@ -54,18 +51,17 @@ export default class Api {
   }
 
   //addCard hara una petición POST al endpoint para crear una nueva tarjeta con el nombre y link especificados.
-  addCard(title, link) {
+  addCard(name, link) {
     const requestOptions = {
       method: 'POST',
       headers: this.getHeaders(),
-      redirect: 'follow',
       body: JSON.stringify({
-        title: title,
+        name: name,
         link: link,
       }),
     };
 
-    return fetch(`${this._options.url}/cards`, requestOptions)
+    return fetch(`${this._options.url}/cards/`, requestOptions)
       .then((response) => response.json())
       .catch((error) => console.log('error', error));
   }
@@ -75,7 +71,6 @@ export default class Api {
     const requestOptions = {
       method: 'DELETE',
       headers: this.getHeaders(),
-      redirect: 'follow',
     };
 
     return fetch(`${this._options.url}/cards/${cardId}`, requestOptions)
@@ -88,7 +83,6 @@ export default class Api {
     const requestOptions = {
       method: 'PATCH',
       headers: this.getHeaders(),
-      redirect: 'follow',
     };
 
     return fetch(`${this._options.url}/users/me/${avatar}`, requestOptions)
@@ -101,7 +95,6 @@ export default class Api {
     const requestOptions = {
       method: 'PUT',
       headers: this.getHeaders(),
-      redirect: 'follow',
     };
 
     return fetch(`${this._options.url}/cards/likes/${cardId}`, requestOptions)
@@ -114,7 +107,6 @@ export default class Api {
     const requestOptions = {
       method: 'DELETE',
       headers: this.getHeaders(),
-      redirect: 'follow',
     };
 
     return fetch(`${this._options.url}/cards/likes/${cardId}`, requestOptions)

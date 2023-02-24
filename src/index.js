@@ -1,20 +1,12 @@
 import './pages/index.css';
-import {
-  //initialCards,
-  selectors,
-  //form,
-  formsElements,
-  updateUserInfo,
-  //handleEditSubmit,
-  handleAddCardSubmit,
-} from './scripts/utils.js';
+import {selectors, formsElements, updateUserInfo} from './scripts/utils.js';
 import Card from './scripts/Card.js';
-//import Popup from './scripts/Popup.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
 import FormValidator from './scripts/FormValidator.js';
 import previewPopup from './scripts/PopupWithImage.js';
 import Section from './scripts/Section.js';
 import UserInfo from './scripts/UserInfo.js';
+import Api from './scripts/Api.js';
 
 export const addCardPopup = new PopupWithForm('.popup_add_card', handleAddCardSubmit);
 
@@ -25,12 +17,29 @@ const api = new Api({
   url: 'https://around.nomoreparties.co/v1/web_es_cohort_04',
 });
 
-api.getCards().then((cardsResult) => {
-  cardSection.setItems(cardsResult);
-  cardSection.renderer();
+// instancia para la clase UserInfo
+const profileUser = new UserInfo({
+  userName: '.profile__user',
+  userOcupation: '.profile__profession',
 });
 
-cardSection = new Section(
+/// Mover despues
+profileUser.getUserInfo();
+
+let userInfo;
+api.getUserInfo().then((result) => {
+  userInfo = result;
+  console.log('userInfo', userInfo);
+});
+
+// const userLiked = (data) => {
+//   return data.likes.some((element) => {
+//     console.log('liked??', element === userInfo._id);
+//     return element._id === userInfo._id;
+//   });
+// };
+
+const cardSection = new Section(
   {
     items: [],
     renderer: (data) => {
@@ -44,13 +53,11 @@ cardSection = new Section(
             deleteHandler() {
               return api.deleteCard(data._id);
             },
-            likeHandler() {
-              return api.addLike(data._id);
-            },
-            deleteLikeHandler() {
-              return api.removeLike(data._id);
+            likesHandler() {
+              return {addLike: api.addLike(data._id), removeLike: api.removeLike(data._id)};
             },
           },
+          user: userInfo,
         },
         '.card-template'
       );
@@ -61,24 +68,20 @@ cardSection = new Section(
   '.cards__container'
 );
 
-function handleAddCardSubmit(event) {
+api.getCardsList().then((cardsResult) => {
+  cardSection.setItems(cardsResult);
+  cardSection.renderer();
+});
+
+function handleAddCardSubmit() {
   const addFormCard = document.querySelector('#form-card');
   const title = addFormCard.querySelector('#popup-input-title').value;
-  const link = addFormCard.querySelector('#popup-input-link').value;
+  const image = addFormCard.querySelector('#popup-input-link').value;
 
-  api.addCard(title, link).then((card) => {
+  api.addCard(title, image).then((card) => {
     cardSection.prepend(card);
   });
 }
-
-// instancia para la clase UserInfo
-const profileUser = new UserInfo({
-  userName: '.profile__user',
-  userOcupation: '.profile__profession',
-});
-
-profileUser.getUserInfo();
-
 // instancia para la clase FormValidator
 formsElements.forEach((form) => {
   const formValidator = new FormValidator(form, selectors);
