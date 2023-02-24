@@ -1,106 +1,124 @@
 export default class Api {
-  constructor({baseUrl, headers}) {
-    this._baseUrl = baseUrl;
-    this._headers = headers;
+  constructor(options) {
+    this._options = options;
   }
 
-  //_returnRes devolvera los datos de la respuesta en formato json.
-  //Si la respuesta HTTP no es satisfactoria, se devuelve una promesa rechazada con un mensaje de error.
-  _returnRes(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Error: ${res.status}`);
+  //getHeaders obtiene el token de la API
+  getHeaders() {
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', this._options.token);
+    return myHeaders;
   }
 
   //getCardList hara una petición para obtener las tarjetas iniciales
-  getCardList() {
-    return fetch(this._baseUrl + '/cards', {
+  getCardsList() {
+    const requestOptions = {
       method: 'GET',
-      headers: this._headers,
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+      headers: this.getHeaders(),
+      redirect: 'follow',
+    };
+
+    return fetch(`${this._options.url}/cards`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 
   //getUserInfo hara una petición para obtener los datos del usuario actual
   getUserInfo() {
-    return fetch(this._baseUrl + '/users/me', {
+    const requestOptions = {
       method: 'GET',
-      headers: this._headers,
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+      headers: this.getHeaders(),
+      redirect: 'follow',
+    };
+
+    return fetch(`${this._options.url}/users/me`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 
   //setUserInfo hara una petición PATCH al endpoint para actualizar los datos del usuario actual con el nombre y descripción especificados.
-  setUserInfo({name, about}) {
-    return fetch(this._baseUrl + '/users/me', {
+  setUserInfo(name, about) {
+    const requestOptions = {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.getHeaders(),
+      redirect: 'follow',
       body: JSON.stringify({
-        name,
-        about,
+        name: name,
+        about: about,
       }),
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+    };
+
+    return fetch(`${this._options.url}/users/me`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 
   //addCard hara una petición POST al endpoint para crear una nueva tarjeta con el nombre y link especificados.
-  addCard({name, link}) {
-    return fetch(this._baseUrl + '/cards', {
+  addCard(title, link) {
+    const requestOptions = {
       method: 'POST',
-      headers: this._headers,
+      headers: this.getHeaders(),
+      redirect: 'follow',
       body: JSON.stringify({
-        name,
-        link,
+        title: title,
+        link: link,
       }),
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+    };
+
+    return fetch(`${this._options.url}/cards`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 
   //removeCard hara una petición DELETE al endpoint para eliminar la tarjeta con el id especificado.
-  removeCard(cardId) {
-    return fetch(this._baseUrl + '/cards/' + cardId, {
+  deleteCard(cardId) {
+    const requestOptions = {
       method: 'DELETE',
-      headers: this._headers,
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+      headers: this.getHeaders(),
+      redirect: 'follow',
+    };
+
+    return fetch(`${this._options.url}/cards/${cardId}`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 
   //setUserAvatar hara una petición PATCH al endpoint para actualizar el avatar del usuario actual con el link especificado.
-  setUserAvatar({avatar}) {
-    return fetch(this._baseUrl + '/users/me/avatar', {
+  updateAvatar(avatar) {
+    const requestOptions = {
       method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: avatar,
-      }),
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+      headers: this.getHeaders(),
+      redirect: 'follow',
+    };
+
+    return fetch(`${this._options.url}/users/me/${avatar}`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 
   //addLike hara una petición PUT al endpoint para agregar un like a la tarjeta con el id especificado.
   addLike(cardId) {
-    return fetch(this._baseUrl + '/cards/likes/' + cardId, {
+    const requestOptions = {
       method: 'PUT',
-      headers: this._headers,
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+      headers: this.getHeaders(),
+      redirect: 'follow',
+    };
+
+    return fetch(`${this._options.url}/cards/likes/${cardId}`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 
   //removeLike hara una petición DELETE al endpoint para eliminar el like a la tarjeta con el id especificado.
   removeLike(cardId) {
-    return fetch(this._baseUrl + '/cards/likes/' + cardId, {
+    const requestOptions = {
       method: 'DELETE',
-      headers: this._headers,
-    }).then((res) => {
-      return this._returnRes(res);
-    });
+      headers: this.getHeaders(),
+      redirect: 'follow',
+    };
+
+    return fetch(`${this._options.url}/cards/likes/${cardId}`, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log('error', error));
   }
 }

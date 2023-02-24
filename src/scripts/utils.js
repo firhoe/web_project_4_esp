@@ -1,33 +1,33 @@
-import {editPopup, cardSection} from '../index.js';
-import Card from './Card.js';
-import previewPopup from './PopupWithImage.js';
+import {editPopup} from '../index.js';
+//import Card from './Card.js';
+//import previewPopup from './PopupWithImage.js';
 
-export const initialCards = [
-  {
-    name: 'Valle de Yosemite',
-    link: 'https://code.s3.yandex.net/web-code/yosemite.jpg',
-  },
-  {
-    name: 'Lago Louise',
-    link: 'https://code.s3.yandex.net/web-code/lake-louise.jpg',
-  },
-  {
-    name: 'Montañas Calvas',
-    link: 'https://code.s3.yandex.net/web-code/bald-mountains.jpg',
-  },
-  {
-    name: 'Latemar',
-    link: 'https://code.s3.yandex.net/web-code/latemar.jpg',
-  },
-  {
-    name: 'Parque Nacional de la Vanoise',
-    link: 'https://code.s3.yandex.net/web-code/vanoise.jpg',
-  },
-  {
-    name: 'Lago di Braies',
-    link: 'https://code.s3.yandex.net/web-code/lago.jpg',
-  },
-];
+// export const initialCards = [
+//   {
+//     name: 'Valle de Yosemite',
+//     link: 'https://code.s3.yandex.net/web-code/yosemite.jpg',
+//   },
+//   {
+//     name: 'Lago Louise',
+//     link: 'https://code.s3.yandex.net/web-code/lake-louise.jpg',
+//   },
+//   {
+//     name: 'Montañas Calvas',
+//     link: 'https://code.s3.yandex.net/web-code/bald-mountains.jpg',
+//   },
+//   {
+//     name: 'Latemar',
+//     link: 'https://code.s3.yandex.net/web-code/latemar.jpg',
+//   },
+//   {
+//     name: 'Parque Nacional de la Vanoise',
+//     link: 'https://code.s3.yandex.net/web-code/vanoise.jpg',
+//   },
+//   {
+//     name: 'Lago di Braies',
+//     link: 'https://code.s3.yandex.net/web-code/lago.jpg',
+//   },
+// ];
 
 export const selectors = {
   formSelector: '.popup__form',
@@ -63,22 +63,22 @@ export function handleEditSubmit(event) {
   event.target.reset();
 }
 
-export function handleAddCardSubmit(event) {
-  const addFormCard = document.querySelector('#form-card');
-  const name = addFormCard.querySelector('#popup-input-title').value;
-  const link = addFormCard.querySelector('#popup-input-link').value;
+// export function handleAddCardSubmit(event) {
+//   const addFormCard = document.querySelector('#form-card');
+//   const name = addFormCard.querySelector('#popup-input-title').value;
+//   const link = addFormCard.querySelector('#popup-input-link').value;
 
-  const data = {name, link};
-  const newCard = new Card(
-    {
-      data,
-      handleCardClick: ({title, image}) => {
-        previewPopup.open({title, image});
-      },
-    },
-    '.card-template'
-  );
+//   const data = {name, link};
+//   const newCard = new Card(
+//     {
+//       data,
+//       handleCardClick: ({title, image}) => {
+//         previewPopup.open({title, image});
+//       },
+//     },
+//     '.card-template'
+//   );
 
-  const card = newCard.generateCard();
-  cardSection.addItem(card);
-}
+//   const card = newCard.generateCard();
+//   cardSection.addItem(card);
+// }

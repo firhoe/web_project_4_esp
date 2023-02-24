@@ -1,6 +1,6 @@
 import './pages/index.css';
 import {
-  initialCards,
+  //initialCards,
   selectors,
   //form,
   formsElements,
@@ -20,16 +20,36 @@ export const addCardPopup = new PopupWithForm('.popup_add_card', handleAddCardSu
 
 export const editPopup = new PopupWithForm('.popup_edit_profile', updateUserInfo);
 
-// renderiza las 6 tarjetas iniciales aparescan, tiene habilitado el boton like y eliminar card
-export const cardSection = new Section(
+const api = new Api({
+  token: 'c3631954-8031-4a1f-b1bb-1315bd763fc8',
+  url: 'https://around.nomoreparties.co/v1/web_es_cohort_04',
+});
+
+api.getCards().then((cardsResult) => {
+  cardSection.setItems(cardsResult);
+  cardSection.renderer();
+});
+
+cardSection = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: (data) => {
       const newCard = new Card(
         {
           data,
           handleCardClick: ({title, image}) => {
             previewPopup.open({title, image});
+          },
+          callbacks: {
+            deleteHandler() {
+              return api.deleteCard(data._id);
+            },
+            likeHandler() {
+              return api.addLike(data._id);
+            },
+            deleteLikeHandler() {
+              return api.removeLike(data._id);
+            },
           },
         },
         '.card-template'
@@ -41,7 +61,15 @@ export const cardSection = new Section(
   '.cards__container'
 );
 
-cardSection.renderer();
+function handleAddCardSubmit(event) {
+  const addFormCard = document.querySelector('#form-card');
+  const title = addFormCard.querySelector('#popup-input-title').value;
+  const link = addFormCard.querySelector('#popup-input-link').value;
+
+  api.addCard(title, link).then((card) => {
+    cardSection.prepend(card);
+  });
+}
 
 // instancia para la clase UserInfo
 const profileUser = new UserInfo({
