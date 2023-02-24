@@ -46,8 +46,8 @@ const cardSection = new Section(
       const newCard = new Card(
         {
           data,
-          handleCardClick: ({title, image}) => {
-            previewPopup.open({title, image});
+          handleCardClick: ({name, link}) => {
+            previewPopup.open({name, link});
           },
           callbacks: {
             deleteHandler() {
@@ -75,10 +75,10 @@ api.getCardsList().then((cardsResult) => {
 
 function handleAddCardSubmit() {
   const addFormCard = document.querySelector('#form-card');
-  const title = addFormCard.querySelector('#popup-input-title').value;
-  const image = addFormCard.querySelector('#popup-input-link').value;
+  const name = addFormCard.querySelector('#popup-input-title').value;
+  const link = addFormCard.querySelector('#popup-input-link').value;
 
-  api.addCard(title, image).then((card) => {
+  api.addCard(name, link).then((card) => {
     cardSection.prepend(card);
   });
 }

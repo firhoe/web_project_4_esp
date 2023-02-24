@@ -1,6 +1,3 @@
 .card__like-button_on {
   background-image: url('../../../../images/blackheart-icon.svg');
 }
-.card__like-counter {
-  color: black;
-}
