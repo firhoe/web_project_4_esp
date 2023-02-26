@@ -1,15 +1,21 @@
 export default class Card {
-  constructor({data, handleCardClick, callbacks, user}, template) {
+  constructor(
+    {data, handleCardClick, handleDeleteClick, handleLikeAdd, handleLikeDelete, userId},
+    template
+  ) {
     this._name = data.name;
     this._link = data.link;
-    this._likesCount = data.likes.length;
-    this._likes = data.likes;
-    this._owner = data.owner;
-    this._id = data._id;
-    this._user = user;
-    this._handleCardClick = handleCardClick;
-    this._callbacks = callbacks;
     this._template = template;
+    this._id = data._id;
+    this._likesCount = data.likes.length;
+    this._ownerId = data.owner._id;
+    this._user = userId;
+    this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeAdd = handleLikeAdd;
+    this._handleLikeDelete = handleLikeDelete;
+    this._likesArray = data.likes;
+    this._cardLikes = data.likes.length;
   }
 
   _getTemplate() {
@@ -21,99 +27,94 @@ export default class Card {
   }
 
   addHeart() {
-    const heartButton = this._cardElement.querySelector('.card__like-button');
+    const heartButton = this._element.querySelector('.card__like-button');
+    const heartNumber = this._element.querySelector('.card__like-counter');
+
     heartButton.classList.add('card__like-button_on');
+    heartNumber.textContent = this._likesArray.length;
   }
 
   removeHeart() {
-    const heartButton = this._cardElement.querySelector('.card__like-button');
+    const heartButton = this._element.querySelector('.card__like-button');
+    const heartNumber = this._element.querySelector('.card__like-counter');
+
     heartButton.classList.remove('card__like-button_on');
+    heartNumber.textContent = this._likesArray.length;
+    if (this._cardLikes === 0) {
+      heartNumber.textContent = '';
+    }
   }
 
-  // _toggleHearts() {
-  //   const heartButton = this._cardElement.querySelector('.card__like-button');
-  //   const heartCounter = this._cardElement.querySelector('.card__like-counter');
-
-  //   heartButton.classList.toggle('card__like-button_on');
-  //   heartCounter.textContent = this._likes.length;
-  // }
-
   _deleteButton() {
-    const trashButton = this._cardElement.querySelector('.card__delete-button');
+    const trashButton = this._element.querySelector('.card__delete-button');
     trashButton.closest('.card').remove();
   }
 
   updateLikes(resArray) {
-    return (this._likes = resArray);
+    return (this._likesArray = resArray);
   }
 
   _setEventListeners() {
-    this._cardElement.querySelector('.card__like-button').addEventListener('click', () => {
-      const callbacks = this._callbacks.likesHandler();
-      const userLiked = this._likes.some((item) => item._id === this._user._id);
-      const handler = userLiked ? callbacks.removeLike : callbacks.addLike;
-
-      const heartCounter = this._cardElement.querySelector('.card__like-counter');
-
-      handler.then((result) => {
-        if (result.likes.some((item) => item._id === this._user._id)) {
-          this.addHeart();
-        } else {
-          this.removeHeart();
-        }
-        this.updateLikes(result.likes);
-        heartCounter.textContent = result.likes.length;
-      });
-
-      if (this._isOwner()) {
-        this._cardElement.querySelector('.card__delete-button').addEventListener('click', () => {
-          this._callbacks.deleteHandler().then(() => {
-            this._deleteButton();
-          });
+    this._element.querySelector('.card__like-button').addEventListener('click', () => {
+      if (
+        this._likesArray.some((like) => {
+          return like._id === this._user;
+        })
+      ) {
+        this._handleLikeDelete({
+          id: this._id,
+        });
+      } else {
+        this._handleLikeAdd({
+          id: this._id,
         });
       }
-      this._cardElement.querySelector('.card__image').addEventListener('click', () => {
-        this._handleCardClick({
-          title: this._name,
-          image: this._link,
-        });
+    });
+
+    this._element.querySelector('.card__delete-button').addEventListener('click', () => {
+      this._handleDeleteClick({
+        id: this._id,
       });
     });
-  }
 
-  _isOwner() {
-    return this._owner._id === this._id;
-  }
+    this._element.querySelector('.card__image').addEventListener('click', () =>
+      this._handleCardClick({
+        name: this._name,
+        link: this._link,
+      })
+    );
 
-  _hasOwnerLike() {
-    return this._likes.some((item) => {
-      return item.owner && item.owner._id === this._user._id;
-    });
+    if (this._ownerId !== this._user) {
+      this._element.querySelector('.card__delete-button').remove();
+    }
   }
-
-  userLiked = () => {
-    return this._likes.some((element) => {
-      return element._id === this._user._id;
-    });
-  };
 
   generateCard() {
-    this._cardElement = this._getTemplate();
+    this._element = this._getTemplate();
     this._setEventListeners();
-    this._cardElement.querySelector('.card__title').textContent = this._name;
-    this._cardElement.querySelector('.card__image').src = this._link;
-    this._cardElement.querySelector('.card__image').alt = this._name;
-    this._cardElement.querySelector('.card__like-counter').textContent = this._likes.length;
 
-    if (this.userLiked()) {
-      this.addHeart();
+    const cardImage = this._element.querySelector('.card__image');
+    this._element.querySelector('.card__title').textContent = this._name;
+    cardImage.src = this._link;
+    cardImage.setAttribute('alt', this._name);
+
+    if (this._cardLikes > 0) {
+      this._element.querySelector('.card__like-counter').textContent = this._cardLikes;
+    } else {
+      this._element.querySelector('.card__like-counter').textContent = '';
     }
 
-    if (this._user === this._owner) {
-      this._cardElement
-        .querySelector('.card__delete-button')
-        .classList.add('card__delete-button_active');
+    if (
+      this._likesArray.some((like) => {
+        return like._id === this._user;
+      })
+    ) {
+      const heartButton = this._element.querySelector('.card__like-button');
+      heartButton.classList.add('card__like-button_on');
+    } else {
+      const heartButton = this._element.querySelector('.card__like-button');
+      heartButton.classList.remove('card__like-button_on');
     }
-    return this._cardElement;
+    return this._element;
   }
 }

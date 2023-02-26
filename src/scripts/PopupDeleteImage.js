@@ -1,9 +1,9 @@
 import Popup from './Popup';
 
 export default class PopupDeleteImage extends Popup {
-  constructor({popupSelector, handleDeleteCard, submitButton}) {
+  constructor({popupSelector, handleFormSubmit, submitButton}) {
     super(popupSelector);
-    this._handleDeleteCard = handleDeleteCard;
+    this._handleFormSubmit = handleFormSubmit;
     this._submitButton = submitButton;
   }
 
@@ -13,7 +13,7 @@ export default class PopupDeleteImage extends Popup {
   }
 
   setSubmitAction(action) {
-    this._handleSubmit = action;
+    this._handleFormSubmit = action;
   }
 
   renderLoading(isLoading) {
