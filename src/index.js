@@ -2,8 +2,8 @@ import './pages/index.css';
 import {
   selectors,
   openFormProfile,
-  inputName,
-  inputOcupation,
+//  inputName,
+//  inputOcupation,
   formEdit,
   formImage,
   formProfileImage,

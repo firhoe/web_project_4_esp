@@ -10,9 +10,9 @@ export const formImage = document.querySelector('.popup__form_type_add-image');
 
 export const formProfileImage = document.querySelector('.popup__form_type_profile-image');
 
-export const inputName = document.querySelector('.popup__input_type_name');
+//export const inputName = document.querySelector('.popup__input_type_name');
 
-export const inputOcupation = document.querySelector('.popup__input_type_about');
+//export const inputOcupation = document.querySelector('.popup__input_type_about');
 
 export const profileTitle = document.querySelector('.profile__user');
 
