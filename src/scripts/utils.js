@@ -20,8 +20,6 @@ export const profileProfession = document.querySelector('.profile__profession');
 
 export const profileImage = document.querySelector('.profile__image');
 
-export const cardTemplate = '#card-template-add';
-
 export const deleteCardSubmitButton = document.querySelector('.popup__button_type_delete');
 
 export const editProfileSubmitButton = document.querySelector('.popup__button_type_edit');
@@ -31,8 +29,6 @@ export const profileImageSubmitButton = document.querySelector('.popup__button_t
 export const profileImageOverlay = document.querySelector('.profile__avatar-overlay');
 
 export const addCardSubmitButton = document.querySelector('.popup__create-card-button');
-
-//export const cardTemplate = document.querySelector('.card-template');
 
 export const initialCards = [
   {

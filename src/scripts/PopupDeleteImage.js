@@ -9,7 +9,7 @@ export default class PopupDeleteImage extends Popup {
 
   close() {
     super.close();
-    this._renderLoading(false);
+    this.renderLoading(false);
   }
 
   setSubmitAction(action) {

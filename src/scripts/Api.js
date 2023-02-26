@@ -34,24 +34,26 @@ export default class Api {
   }
 
   //setUserInfo hara una petición PATCH al endpoint para actualizar los datos del usuario actual con el nombre y descripción especificados.
-  setUserInfo(name, about) {
-    return fetch(this._baseUrl + '/users/me', {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        name,
-        about,
-      }),
-    })
-      .then((res) => {
-        return this._returnRes(res);
+  setUserInfo({name, about}) {
+    return (
+      fetch(this._baseUrl + '/users/me', {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          name,
+          about,
+        }),
       })
-      //borrar este catch luego xd
-      .catch((err) => console.log(err));
+        .then((res) => {
+          return this._returnRes(res);
+        })
+        //borrar este catch luego xd
+        .catch((err) => console.log(err))
+    );
   }
 
   //addCard hara una petición POST al endpoint para crear una nueva tarjeta con el nombre y link especificados.
-  addCard(name, link) {
+  addCard({name, link}) {
     return fetch(this._baseUrl + '/cards', {
       method: 'POST',
       headers: this._headers,
@@ -80,7 +82,7 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatarUrl: avatar,
+        avatar: avatar,
       }),
     }).then((res) => {
       return this._returnRes(res);

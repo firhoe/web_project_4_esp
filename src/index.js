@@ -1,7 +1,6 @@
 import './pages/index.css';
 import {
   selectors,
-  cardTemplate,
   openFormProfile,
   inputName,
   inputOcupation,
@@ -27,6 +26,14 @@ import Section from './scripts/Section.js';
 import UserInfo from './scripts/UserInfo.js';
 import Api from './scripts/Api.js';
 
+export const api = new Api({
+  baseUrl: 'https://around.nomoreparties.co/v1/web_es_cohort_04',
+  headers: {
+    authorization: 'c3631954-8031-4a1f-b1bb-1315bd763fc8',
+    'Content-Type': 'application/json',
+  },
+});
+
 const profilePopupValidator = new FormValidator(formEdit, selectors);
 const imagePopupValidator = new FormValidator(formImage, selectors);
 const profileImagePopupValidator = new FormValidator(formProfileImage, selectors);
@@ -42,9 +49,10 @@ const editPopup = new PopupWithForm({
   popupSelector: '.popup_edit_profile',
   handleFormSubmit: (data) => {
     api
-      .setUserInfo({name: data.username, about: data.userocupation})
-      .then(() => {
-        profileUser.setUserInfo({username: data.username, userocupation: data.userocupation});
+      .setUserInfo({name: data.name, about: data.about})
+      .then((response) => {
+        profileUser.setUserInfo({username: response.name, userocupation: response.about});
+
         editPopup.close();
       })
       .catch((err) => console.log(err));
@@ -61,19 +69,8 @@ export const profileUser = new UserInfo({
 });
 
 openFormProfile.addEventListener('click', () => {
-  const {userName, userOcupation} = profileUser.getUserInfo();
-  inputName.value = userName;
-  inputOcupation.value = userOcupation;
   editPopup.open();
   profilePopupValidator.resetValidation();
-});
-
-export const api = new Api({
-  baseUrl: 'https://around.nomoreparties.co/v1/web_es_cohort_04',
-  headers: {
-    authorization: 'c3631954-8031-4a1f-b1bb-1315bd763fc8',
-    'Content-Type': 'application/json',
-  },
 });
 
 api
@@ -103,7 +100,7 @@ api
           popupSelector: '.popup_add_card',
           handleFormSubmit: (data) => {
             api
-              .addCard(data)
+              .addCard({name: data.title, link: data['image-link']})
               .then((data) => {
                 const newCardElement = createCard(data);
                 cardSection.addItem(newCardElement);
@@ -128,7 +125,7 @@ api
 const profileImagePopup = new PopupWithForm({
   popupSelector: '.popup_image_profile',
   handleFormSubmit: (data) => {
-    const {profileimage: avatar} = data;
+    const avatar = data['image-link'];
     api
       .setUserAvatar(avatar)
       .then(() => {
@@ -168,7 +165,7 @@ function createCard(data) {
             .removeCard(id)
             .then(() => {
               deleteCardPopup.close();
-              newCard.deleteButton();
+              newCard._deleteButton();
             })
             .catch((err) => console.log(err));
         });
@@ -193,7 +190,7 @@ function createCard(data) {
       },
       userId: profileUser.userId,
     },
-    cardTemplate
+    '.card-template'
   );
   return newCard.generateCard();
 }
@@ -226,9 +223,3 @@ function createCard(data) {
 //   },
 //   '.cards__container'
 // );
-
-// instancia para la clase FormValidator
-// formsElements.forEach((form) => {
-//   const formValidator = new FormValidator(form, selectors);
-//   formValidator.enableValidation();
-// });
