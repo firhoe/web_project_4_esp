@@ -48,7 +48,7 @@ Tecnologias Utilizadas 🛠️
 
 - [Proyecto en Figma .v1](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
 - [Proyecto en Figma .v2](https://www.figma.com/file/ioanjgLLuVNMBLs1z2woGZ/WEB%2C-Sprint-5%3A-Alrededor-de-los-EE.UU.-%7C-desktop-%2B-mobile?node-id=0%3A1&t=ogdDXMDoz7uB1jIz-1)
-- [Proyecto en Figma .v2](https://www.figma.com/file/pBeKZQl6ZGKd79hjOt0DO2/WEB-Sprint-9%3A-JavaScript-aplicado?node-id=0%3A1)
+- [Proyecto en Figma .v3](https://www.figma.com/file/pBeKZQl6ZGKd79hjOt0DO2/WEB-Sprint-9%3A-JavaScript-aplicado?node-id=0%3A1)
 
 ## Proyecto en Vivo 💻
 
