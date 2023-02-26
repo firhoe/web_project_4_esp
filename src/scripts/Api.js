@@ -46,6 +46,7 @@ export default class Api {
       .then((res) => {
         return this._returnRes(res);
       })
+      //borrar este catch luego xd
       .catch((err) => console.log(err));
   }
 
