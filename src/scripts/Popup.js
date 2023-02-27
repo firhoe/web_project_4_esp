@@ -20,14 +20,17 @@ export default class Popup {
     }
   }
 
+  _isClickOutside(evt) {
+    return (
+      evt.target.classList.contains('popup_opened') ||
+      evt.target.classList.contains('popup__close-button') ||
+      !evt.target.closest('.popup')
+    );
+  }
+
   setEventListeners() {
     this._popupElement.addEventListener('click', (evt) => {
-      if (
-        evt.target.classList.contains('popup_opened') ||
-        evt.target.classList.contains('popup__close-button')
-      ) {
-        this.close();
-      } else if (!evt.target.closest('.popup')) {
+      if (this._isClickOutside(evt)) {
         this.close();
       }
     });

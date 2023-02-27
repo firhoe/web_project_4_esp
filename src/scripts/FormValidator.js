@@ -6,8 +6,12 @@ export default class FormValidator {
     this._inactiveButtonClass = selectors.inactiveButtonClass;
     this._inputErrorClass = selectors.inputErrorClass;
     this._errorClass = selectors.errorClass;
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector)
+    );
+    this._buttonElement = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
   }
 
   _showInputError(input, errorMessage) {
@@ -32,19 +36,23 @@ export default class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((input) => {
-      return !input.validity.valid;
-    });
-  }
+  _hasInvalidInput = (inputList) =>
+    inputList.some((input) => !input.validity.valid);
 
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
-      this._buttonElement.classList.add(this._inactiveButtonClass);
-      this._buttonElement.disabled = true;
+      this._setButtonState(true, this._inactiveButtonClass);
     } else {
-      this._buttonElement.classList.remove(this._inactiveButtonClass);
-      this._buttonElement.disabled = false;
+      this._setButtonState(false, this._inactiveButtonClass);
+    }
+  }
+
+  _setButtonState(disabled, classToAdd) {
+    this._buttonElement.disabled = disabled;
+    if (disabled) {
+      this._buttonElement.classList.add(classToAdd);
+    } else {
+      this._buttonElement.classList.remove(classToAdd);
     }
   }
 

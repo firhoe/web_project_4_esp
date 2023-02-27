@@ -98,11 +98,11 @@ api
 
         const addCardPopup = new PopupWithForm({
           popupSelector: '.popup_add_card',
-          handleFormSubmit: (data) => {
+          handleFormSubmit: (formData) => {
             api
-              .addCard({name: data.title, link: data['image-link']})
-              .then((data) => {
-                const newCardElement = createCard(data);
+              .addCard({name: formData.title, link: formData['image-link']})
+              .then((newCard) => {
+                const newCardElement = createCard(newCard);
                 cardSection.addItem(newCardElement);
                 addCardPopup.close();
               })
@@ -194,32 +194,3 @@ function createCard(data) {
   );
   return newCard.generateCard();
 }
-
-// const cardSection = new Section(
-//   {
-//     items: [],
-//     renderer: (data) => {
-//       const newCard = new Card(
-//         {
-//           data,
-//           handleCardClick: ({name, link}) => {
-//             previewPopup.open({name, link});
-//           },
-//           callbacks: {
-//             deleteHandler() {
-//               return api.deleteCard(data._id);
-//             },
-//             likesHandler() {
-//               return {addLike: api.addLike(data._id), removeLike: api.removeLike(data._id)};
-//             },
-//           },
-//           user: userInfo,
-//         },
-//         '.card-template'
-//       );
-//       const cardElement = newCard.generateCard();
-//       cardSection.addItem(cardElement);
-//     },
-//   },
-//   '.cards__container'
-// );
