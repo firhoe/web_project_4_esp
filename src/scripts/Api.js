@@ -7,7 +7,7 @@ export default class Api {
   // _handleResponse es una función útil para manejar errores y procesar los datos recibidos de las solicitudes de API
   _handleResponse(res) {
     if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
+      throw new Error(`Error: ${res.status}`);
     }
     return res.json();
   }
@@ -60,6 +60,6 @@ export default class Api {
 
   //removeLike hara una petición DELETE al endpoint para eliminar el like a la tarjeta con el id especificado.
   removeLike(cardId) {
-  return this._makeRequest('DELETE', `${this._baseUrl}/cards/likes/${cardId}`);
+    return this._makeRequest('DELETE', `${this._baseUrl}/cards/likes/${cardId}`);
   }
 }
